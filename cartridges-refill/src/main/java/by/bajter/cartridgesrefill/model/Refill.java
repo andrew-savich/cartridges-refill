@@ -24,6 +24,7 @@ public class Refill {
 	private Long id;
 	private Date date;
 	private Cartridge cartridge;
+	private Integer gram;
 	private Client client;
 	private List<Part> replacedParts;
 	private String comment;
