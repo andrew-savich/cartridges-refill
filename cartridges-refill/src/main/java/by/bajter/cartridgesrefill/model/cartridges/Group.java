@@ -1,5 +1,7 @@
 package by.bajter.cartridgesrefill.model.cartridges;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,12 +11,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Cartridge {
+public class Group {
 	@Id
 	private Long id;
 	private String name;
-	private Group group;
-	private Type type;
-	private Color color;
-	private Integer gram;
+	private List<Cartridge> models;
 }
