@@ -18,5 +18,5 @@ public class Group {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private List<Cartridge> models;
+	private List<Model> models;
 }
