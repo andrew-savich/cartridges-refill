@@ -7,12 +7,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import by.bajter.cartridgesrefill.model.cartridges.Cartridge;
-import by.bajter.cartridgesrefill.model.user.User;
+import by.bajter.cartridgesrefill.model.user.Employee;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,12 +25,12 @@ public class Refill {
 	private Long id;
 
 	@Temporal(TemporalType.DATE)
-	private Date fillingDdate;
+	private Date fillDate;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Cartridge cartridge;
 
-	private Integer actuallyGramsToner;
+	private Integer actualGramsToner;
 
 	private Boolean changedDrum;
 
@@ -48,8 +48,8 @@ public class Refill {
 
 	private String comment;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	private User refueller;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Employee refueller;
 
 	private Boolean isIssuedAct;
 
