@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +19,18 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotNull
 	private String name;
+	@NotNull
 	private String surName;
 	
+	@NotNull
+	private String login;
+	@NotNull
+	private String password;
+	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Position position;
 }

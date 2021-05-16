@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import by.bajter.cartridgesrefill.model.cartridges.Cartridge;
 import by.bajter.cartridgesrefill.model.user.Employee;
@@ -24,12 +25,14 @@ public class Refill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date fillDate;
-
+	
+	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Cartridge cartridge;
-
+	
 	private Integer actualGramsToner;
 
 	private Boolean changedDrum;
@@ -48,9 +51,10 @@ public class Refill {
 
 	private String comment;
 
+	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Employee refueller;
-
+	
 	private Boolean isIssuedAct;
 
 }
