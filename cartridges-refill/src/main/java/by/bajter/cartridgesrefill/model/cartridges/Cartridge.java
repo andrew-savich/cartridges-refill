@@ -14,16 +14,25 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import by.bajter.cartridgesrefill.model.client.Client;
+import by.bajter.cartridgesrefill.services.UniqIdentifyGenerator;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Cartridge {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	public Cartridge() {
+		this.uniqIdentify = UniqIdentifyGenerator.generate();
+	}
+
+	public Cartridge(@NotNull String uniqIdentify, @NotNull CartridgeModel cartridgeModel, @NotNull Client client) {
+		this.uniqIdentify = uniqIdentify;
+		this.cartridgeModel = cartridgeModel;
+		this.client = client;
+	}
 
 	@NotNull
 	@Temporal(TemporalType.DATE)

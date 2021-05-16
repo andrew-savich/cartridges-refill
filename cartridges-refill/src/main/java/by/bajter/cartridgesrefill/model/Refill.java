@@ -33,8 +33,12 @@ public class Refill {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Cartridge cartridge;
 	
+	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Employee refueller;
+	
 	private Integer actualGramsToner;
-
+	
 	private Boolean changedDrum;
 
 	private Boolean changedPcr;
@@ -50,10 +54,6 @@ public class Refill {
 	private Boolean changedFirmware;
 
 	private String comment;
-
-	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Employee refueller;
 	
 	private Boolean isIssuedAct;
 
