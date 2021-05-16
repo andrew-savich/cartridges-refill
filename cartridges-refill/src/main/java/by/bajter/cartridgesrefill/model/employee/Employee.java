@@ -1,4 +1,4 @@
-package by.bajter.cartridgesrefill.model.user;
+package by.bajter.cartridgesrefill.model.employee;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,7 +23,7 @@ public class Employee {
 	@NotNull
 	private String name;
 	@NotNull
-	private String surName;
+	private String surname;
 	
 	@NotNull
 	private String login;

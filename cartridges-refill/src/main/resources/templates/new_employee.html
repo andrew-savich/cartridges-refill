@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<div th:replace="/parts/header :: myheader"></div>
+</head>
+<body>
+	<div th:insert="/parts/navbar :: navbar"></div>
+	<h1>New employee</h1>
+
+	<form action="#" th:action="@{/save}" th:object="${employee}" method="post">
+		<div class="form-group">
+			<label for="formGroupExampleInput">First Name</label>
+			<input type="text" class="form-control" id="formGroupExampleInput" placeholder="First Name" th:field="*{name}">
+		</div>
+		<div class="form-group">
+			<label for="formGroupExampleInput">Sur Name</label>
+			<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Surname" th:field="*{surname}">
+		</div>
+		<div class="form-group">
+			<label for="formGroupExampleInput">Login</label>
+			<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Login" th:field="*{login}">
+		</div>
+		<div class="form-group">
+			<label for="formGroupExampleInput">Password</label>
+			<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Password" th:field="*{password}">
+		</div>
+		<div class="form-group">
+			<label for="formGroupExampleInput">Position</label>
+			<input type="text" class="form-control" id="formGroupExampleInput" placeholder="DIRECTOR, REFUELLER, SECRETARY, STAGER" th:field="*{position}">
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary">Add new employee</button>
+		</div>
+	</form>
+	
+
+</body>
+</html>

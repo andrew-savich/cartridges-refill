@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import by.bajter.cartridgesrefill.model.cartridges.Cartridge;
-import by.bajter.cartridgesrefill.model.user.Employee;
+import by.bajter.cartridgesrefill.model.employee.Employee;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
