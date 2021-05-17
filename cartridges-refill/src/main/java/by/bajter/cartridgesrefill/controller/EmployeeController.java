@@ -15,12 +15,13 @@ import by.bajter.cartridgesrefill.model.employee.Employee;
 import by.bajter.cartridgesrefill.services.EmployeeService;
 
 @Controller
+@RequestMapping("/employees")
 public class EmployeeController {
 
 	@Autowired
 	private EmployeeService service;
 
-	@RequestMapping("/employees")
+	@RequestMapping("")
 	public String showEmployeeList(Model model) {
 		List<Employee> employees = service.getAllEmployees();
 		model.addAttribute("employees", employees);
@@ -28,7 +29,7 @@ public class EmployeeController {
 		return "employees";
 	}
 
-	@RequestMapping("/employees/new")
+	@RequestMapping("/new")
 	public String showViewNewEmployee(Model model) {
 		Employee employee = new Employee();
 
@@ -39,12 +40,12 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveNewEmployee(@ModelAttribute("employee") Employee employee) {
-		service.saveEmployee(employee);
+		service.save(employee);
 
-		return "redirect:/employees";
+		return "redirect:";
 	}
 	
-	@RequestMapping("/employees/edit/{id}")
+	@RequestMapping("/edit/{id}")
 	public ModelAndView showEditEmployeeView(@PathVariable(name = "id") Long id) {
 		ModelAndView modelAndView = new ModelAndView("edit_employee");
 		Employee employee = service.findById(id);
@@ -54,9 +55,11 @@ public class EmployeeController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/employees/delete/{id}")
+	@RequestMapping("/delete/{id}")
 	public String deleteEmployee(@PathVariable(name = "id") Long id) {
+		System.out.println("deleting employee with id: " + id);
 		service.deleteById(id);
+		System.out.println("deletied employee with id: " + id);
 		
 		return "redirect:/employees";
 	}

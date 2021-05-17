@@ -16,11 +16,6 @@ public class AppController {
 		return "cartridges";
 	}
 	
-	@RequestMapping("/clients")
-	public String showClientsPage() {
-		return "clients";
-	}
-	
 	@RequestMapping("/users")
 	public String showUsersPage() {
 		return "users";

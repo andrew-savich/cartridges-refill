@@ -7,7 +7,7 @@
 	<div th:insert="/parts/navbar :: navbar"></div>
 	<h1>New employee</h1>
 
-	<form action="#" id="new-employee-form" th:action="@{/save}"
+	<form action="#" id="new-employee-form" th:action="@{/employees/save}"
 		th:object="${employee}" method="post">
 		<div class="form-group">
 			<label>First Name</label> <input
