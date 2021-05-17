@@ -53,5 +53,12 @@ public class EmployeeController {
 		
 		return modelAndView;
 	}
-
+	
+	@RequestMapping("/employees/delete/{id}")
+	public String deleteEmployee(@PathVariable(name = "id") Long id) {
+		service.deleteById(id);
+		
+		return "redirect:/employees";
+	}
+	
 }
