@@ -19,4 +19,6 @@ public class Client {
 	
 	@NotNull
 	private String name;
+	
+	private String contacts;
 }
