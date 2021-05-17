@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import by.bajter.cartridgesrefill.model.employee.Employee;
 import by.bajter.cartridgesrefill.services.EmployeeService;
@@ -40,6 +42,16 @@ public class EmployeeController {
 		service.saveEmployee(employee);
 
 		return "redirect:/employees";
+	}
+	
+	@RequestMapping("/employees/edit/{id}")
+	public ModelAndView showEditEmployeeView(@PathVariable(name = "id") Long id) {
+		ModelAndView modelAndView = new ModelAndView("edit_employee");
+		Employee employee = service.findById(id);
+		
+		modelAndView.addObject("employee", employee);
+		
+		return modelAndView;
 	}
 
 }

@@ -23,8 +23,8 @@
 				<td th:text="${employee.position}">Position</td>
 				<td th:text="${employee.login}">Login</td>
 				<td>
-					<a th:href="@{'/edit/' + ${employee.id}}">Edit</a>
-					<a th:href="@{'/delete/' + ${employee.id}}">Delete</a>
+					<a th:href="@{'/employees/edit/' + ${employee.id}}">Edit</a>
+					<a th:href="@{'/employees/delete/' + ${employee.id}}">Delete</a>
 				</td>
 			</tr>
 			<tr>
@@ -32,7 +32,6 @@
 					<button type="submit" class="btn btn-primary">Add new employee</button>
 				</form>
 			</tr>
-
 		</tbody>
 	</table>
 
