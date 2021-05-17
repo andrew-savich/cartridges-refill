@@ -19,7 +19,7 @@
 		<tbody>
 			<tr th:each="employee : ${employees}">
 				<th scope="row" th:text="${employee.id}">Employee ID</th>
-				<td th:text="${employee.name} + ${employee.surname}">Full name</td>
+				<td th:text="${employee.name} +' ' + ${employee.surname}">Full name</td>
 				<td th:text="${employee.position}">Position</td>
 				<td th:text="${employee.login}">Login</td>
 				<td>

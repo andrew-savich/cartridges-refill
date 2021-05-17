@@ -33,7 +33,7 @@ public class Cartridge {
 		this.cartridgeModel = cartridgeModel;
 		this.client = client;
 	}
-
+	
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date addDate;

@@ -29,10 +29,9 @@ public class EmployeeController {
 	@RequestMapping("/employees/new")
 	public String showViewNewEmployee(Model model) {
 		Employee employee = new Employee();
-		
-		
+
 		model.addAttribute("employee", employee);
-		
+
 		return "new_employee";
 	}
 
