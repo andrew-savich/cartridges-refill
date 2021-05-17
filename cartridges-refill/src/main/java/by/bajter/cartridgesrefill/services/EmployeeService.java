@@ -17,11 +17,11 @@ public class EmployeeService {
 		return repository.findAll();
 	}
 
-	public void saveEmployee(Employee employee) {
+	public void save(Employee employee) {
 		repository.save(employee);
 	}
 
-	public void deleteEmployee(Employee employee) {
+	public void delete(Employee employee) {
 		repository.delete(employee);
 	}
 	
