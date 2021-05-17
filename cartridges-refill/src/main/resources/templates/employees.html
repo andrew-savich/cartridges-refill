@@ -23,8 +23,7 @@
 				<td th:text="${employee.position}">Position</td>
 				<td th:text="${employee.login}">Login</td>
 				<td>
-					<a th:href="@{'/employees/edit/' + ${employee.id}}">Edit</a>
-					<a th:href="@{'/employees/delete/' + ${employee.id}}">Delete</a>
+					<a class="btn btn-primary" th:href="@{'/employees/edit/' + ${employee.id}}" role="button">Edit</a>
 				</td>
 			</tr>
 			<tr>
@@ -35,13 +34,5 @@
 		</tbody>
 	</table>
 
-	<tr th:each="product : ${products}">
-		<td th:text="${product.id}">Product ID</td>
-		<td th:text="${product.name}">Name</td>
-		<td th:text="${product.brand}">Brand</td>
-		<td th:text="${product.madein}">Made in</td>
-		<td th:text="${product.price}">Price</td>
-		<td><a th:href="@{'/edit/' + ${product.id}}">Edit</a> <a
-			th:href="@{'/delete/' + ${product.id}}">Delete</a></td>
 </body>
 </html>
