@@ -25,7 +25,7 @@ public class ClientController {
 		List<Client> clients = service.getAllClients();
 		model.addAttribute("clients", clients);
 
-		return "clients";
+		return "/clients";
 	}
 
 	@RequestMapping("/new")
@@ -34,7 +34,7 @@ public class ClientController {
 
 		model.addAttribute("client", client);
 
-		return "client_new";
+		return "clientAddEdit";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -46,7 +46,7 @@ public class ClientController {
 
 	@RequestMapping("/edit/{id}")
 	public ModelAndView showEditClientView(@PathVariable(name = "id") Long id) {
-		ModelAndView modelAndView = new ModelAndView("client_edit");
+		ModelAndView modelAndView = new ModelAndView("clientAddEdit");
 		Client client = service.findById(id);
 
 		modelAndView.addObject("client", client);

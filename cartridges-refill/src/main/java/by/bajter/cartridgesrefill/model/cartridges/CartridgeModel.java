@@ -1,5 +1,6 @@
 package by.bajter.cartridgesrefill.model.cartridges;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,6 +23,7 @@ public class CartridgeModel {
 	private Long id;
 	
 	@NotNull
+	@Column(unique = true)
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
