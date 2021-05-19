@@ -5,8 +5,10 @@
 </head>
 <body>
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
-	<h1>Clients</h1>
+
 	<div class="mx-auto" style="width: 80%">
+		<h1>Clients</h1>
+
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -26,8 +28,7 @@
 			</tbody>
 		</table>
 		<form action="/clients/new">
-			<button type="submit" class="btn btn-primary">Add new
-				client</button>
+			<button type="submit" class="btn btn-primary">Add new client</button>
 		</form>
 	</div>
 </body>
