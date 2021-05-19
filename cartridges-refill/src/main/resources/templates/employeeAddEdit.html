@@ -5,12 +5,13 @@
 </head>
 <body>
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
-	<h1>Edit employee</h1>
-
-	<div  class="mx-auto" style="width: 80%">
+	<h1 th:if="${employee.id == null}">Add new employee</h1>
+	<h1 th:if="${employee.id != null}">Edit employee</h1>
+	
+	<div  class="mx-auto" style="width: 50%">
 		<form action="#" th:action="@{/employees/save}" th:object="${employee}"
 			method="post">
-			<div class="form-group">
+			<div th:if="${employee.id != null}" class="form-group">
 				<label>ID</label> <input type="text" class="form-control"
 					th:field="*{id}" readonly="readonly">
 			</div>
