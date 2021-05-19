@@ -1,5 +1,6 @@
 package by.bajter.cartridgesrefill.model.client;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,8 @@ public class Client {
 	private Long id;
 	
 	@NotNull
+	@Column(unique = true)
 	private String name;
 	
-	private String contacts;
+	private String additionalInfo;
 }

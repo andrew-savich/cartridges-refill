@@ -35,7 +35,7 @@ public class EmployeeController {
 
 		model.addAttribute("employee", employee);
 
-		return "new_employee";
+		return "employee_new";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -47,7 +47,7 @@ public class EmployeeController {
 	
 	@RequestMapping("/edit/{id}")
 	public ModelAndView showEditEmployeeView(@PathVariable(name = "id") Long id) {
-		ModelAndView modelAndView = new ModelAndView("edit_employee");
+		ModelAndView modelAndView = new ModelAndView("employee_edit");
 		Employee employee = service.findById(id);
 		
 		modelAndView.addObject("employee", employee);

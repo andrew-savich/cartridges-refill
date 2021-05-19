@@ -1,5 +1,6 @@
 package by.bajter.cartridgesrefill.model.employee;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,6 +27,7 @@ public class Employee {
 	private String surname;
 	
 	@NotNull
+	@Column(unique = true)
 	private String login;
 	@NotNull
 	private String password;

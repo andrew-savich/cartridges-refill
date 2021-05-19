@@ -28,14 +28,12 @@
 						th:href="@{'/employees/edit/' + ${employee.id}}" role="button">Edit</a>
 					</td>
 				</tr>
-				<tr>
-					<form action="/employees/new">
-						<button type="submit" class="btn btn-primary">Add new
-							employee</button>
-					</form>
-				</tr>
 			</tbody>
 		</table>
+		<form action="/employees/new">
+			<button type="submit" class="btn btn-primary">Add new
+				employee</button>
+		</form>
 	</div>
 
 </body>
