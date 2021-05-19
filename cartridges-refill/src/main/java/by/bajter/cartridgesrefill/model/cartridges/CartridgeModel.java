@@ -29,11 +29,13 @@ public class CartridgeModel {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private CartridgeGroup group;
 	
-	private Integer defaultGramsToner;
+	private Integer defaultGrams;
 	
 	@Enumerated(EnumType.STRING)
 	private Type type;
 	
 	@Enumerated(EnumType.STRING)
 	private Color color;
+	
+	private String description;
 }
