@@ -11,15 +11,4 @@ public class AppController {
 		return "index";
 	}
 	
-	@RequestMapping("/cartridges")
-	public String showCartrigesPage() {
-		return "cartridges";
-	}
-	
-	@RequestMapping("/users")
-	public String showUsersPage() {
-		return "users";
-	}
-	
-	
 }

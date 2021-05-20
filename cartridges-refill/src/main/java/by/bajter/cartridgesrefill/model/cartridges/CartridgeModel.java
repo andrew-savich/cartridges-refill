@@ -1,5 +1,6 @@
 package by.bajter.cartridgesrefill.model.cartridges;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,16 +27,16 @@ public class CartridgeModel {
 	@Column(unique = true)
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private CartridgeGroup group;
-	
-	private Integer defaultGrams;
 	
 	@Enumerated(EnumType.STRING)
 	private Type type;
 	
 	@Enumerated(EnumType.STRING)
 	private Color color;
+	
+	private Integer defaultGrams;
 	
 	private String description;
 }

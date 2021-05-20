@@ -8,12 +8,13 @@
 
 	<div class="mx-auto" style="width: 80%">
 		<h1>Cartridge models</h1>
-	
+
 		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col">Name</th>
+					<th scope="col">Model</th>
+					<th scope="col">Group</th>
 					<th scope="col">Type</th>
 					<th scope="col">Color</th>
 					<th scope="col">Default grams</th>
@@ -22,10 +23,12 @@
 			</thead>
 			<tbody>
 				<tr th:each="model : ${cartidgeModels}">
+					<td th:text="${model.id}">Name</td>
 					<td th:text="${model.name}">Name</td>
+					<td th:text="${model.group.name}">Group</td>
 					<td th:text="${model.type}">Type</td>
 					<td th:text="${model.color}">Color</td>
-					<td th:text="${model.defaultGrams}">Default Grams</td>
+					<td th:text="${model.defaultGrams}">Default grams</td>
 					<td th:text="${model.description}">Description</td>
 					<td><a class="btn btn-primary"
 						th:href="@{'/cartidgeModels/edit/' + ${model.id}}" role="button">Edit</a>
@@ -33,11 +36,10 @@
 				</tr>
 			</tbody>
 		</table>
-		<form action="/cartidgeModels/new">
-			<button type="submit" class="btn btn-primary">Add new
-				model</button>
+		<form action="/cartridgeModels/new">
+			<button type="submit" class="btn btn-primary">Add new model</button>
 		</form>
 	</div>
-<div th:insert="/common_view_parts/scripts :: scripts"></div>
+	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
 </html>

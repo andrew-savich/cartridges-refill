@@ -34,11 +34,11 @@ public class CartridgeModelController {
 
 		model.addAttribute("cartridgeModel", cartridgeModel);
 
-		return "cartridgeModelsAddEdit";
+		return "cartridgeModelAddEdit";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveNewCartidgeModel(@ModelAttribute("cartridgeModel") CartridgeModel cartridgeModel) {
+	public String saveCartidgeModel(@ModelAttribute("cartridgeModel") CartridgeModel cartridgeModel) {
 		service.save(cartridgeModel);
 
 		return "redirect:";
@@ -46,7 +46,7 @@ public class CartridgeModelController {
 
 	@RequestMapping("/edit/{id}")
 	public ModelAndView showEditCartridgeModelView(@PathVariable(name = "id") Long id) {
-		ModelAndView modelAndView = new ModelAndView("cartridgeModelsAddEdit");
+		ModelAndView modelAndView = new ModelAndView("cartridgeModelAddEdit");
 		CartridgeModel cartridgeModel = service.findById(id);
 
 		modelAndView.addObject("cartridgeModel", cartridgeModel);
