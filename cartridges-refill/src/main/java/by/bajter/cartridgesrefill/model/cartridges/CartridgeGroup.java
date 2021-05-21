@@ -2,6 +2,7 @@ package by.bajter.cartridgesrefill.model.cartridges;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class CartridgeGroup {
 	private Long id;
 	
 	@NotNull
+	@Column(unique = true)
 	private String name;
 	
 	@OneToMany(fetch = FetchType.EAGER)

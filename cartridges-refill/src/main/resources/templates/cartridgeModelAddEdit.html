@@ -27,7 +27,7 @@
 			
 			<div class="form-group">
 				<label>Type</label> <select class="form-control" name="type">
-					<option th:text="${cartridgeModel.color}"></option>
+					<option th:text="${cartridgeModel.type}"></option>
 					<option
 						th:each="type : ${T(by.bajter.cartridgesrefill.model.cartridges.Type).values()}"
 						th:if="${cartridgeModel.type != type}" th:value="${type}"
@@ -44,7 +44,6 @@
 						th:text="${color}"></option>
 				</select>
 			</div>
-
 			<div class="form-group">
 				<label>Default grams</label> <input type="text" class="form-control"
 					th:field="*{defaultGrams}">
@@ -59,8 +58,8 @@
 		</form>
 		<div th:if="${cartridgeModel.id != null}">
 			<a class="btn btn-primary btn-block"
-				th:href="@{'/cartridgeModels/delete/' + ${cartridgeModels.id}}" role="button">Delete
-				this model</a>
+				th:href="@{'/cartridgeModels/delete/' + ${cartridgeModel.id}}" role="button">Delete
+				model</a>
 		</div>
 		<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>

@@ -58,6 +58,6 @@ public class CartridgeModelController {
 	public String deleteCartridgeModel(@PathVariable(name = "id") Long id) {
 		service.deleteById(id);
 
-		return "redirect:/cartridgeModel";
+		return "redirect:/cartridgeModels";
 	}
 }
