@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<div th:replace="/common_view_parts/header :: myheader"></div>
+</head>
+<body>
+	<div th:insert="/common_view_parts/navbar :: navbar"></div>
+
+	<div class="mx-auto" style="width: 80%">
+		<h1>Cartridge Groups</h1>
+
+		<table class="table table-hover">
+			<tbody th:each="group : ${groups}">
+				<tr>
+					<th th:text="${group.name}"></th>
+					<td>
+						<a class="btn btn-primary" th:href="@{'/cartridgeGroups/edit/' + ${group.id}}" role="button">Edit group</a>
+						<a class="btn btn-primary" th:href="@{'/cartridgeGroups/newModel/'}" role="button">Add new model</a>
+					</td>
+												
+					<tr th:each="model : ${group.cartridgeModels}">
+						<td th:text="${model.name}">Name</td>
+						<td th:text="${model.type}">Type</td>
+						<td th:text="${model.color}">Color</td>
+						<td th:text="${model.defaultGrams}">Default grams</td>
+						<td th:text="${model.description}">Description</td>
+						<td><a class="btn btn-primary"
+							th:href="@{'/modelsAndGroups/editModel/' + ${model.id}}" role="button">Edit model</a>
+						</td>
+					</tr>
+			</tbody>
+		</table>
+		<form action="/cartridgeGroups/new">
+			<button type="submit" class="btn btn-primary">Add new group</button>
+		</form>
+	</div>
+	<div th:insert="/common_view_parts/scripts :: scripts"></div>
+</body>
+</html>
