@@ -1,7 +1,9 @@
 package by.bajter.cartridgesrefill.model.cartridges;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +28,16 @@ public class CartridgeGroup {
 	@Column(unique = true)
 	private String name;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<CartridgeModel> cartridgeModels;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CartridgeModel> cartridgeModels = new ArrayList<>();
+	
+	public void addCartridgeModel(CartridgeModel cartridgeModel) {
+		cartridgeModels.add(cartridgeModel);
+		cartridgeModel.setGroup(this);
+	}
+	
+	public void removeCartridgeModel(CartridgeModel cartridgeModel) {
+		cartridgeModels.remove(cartridgeModel);
+		cartridgeModel.setGroup(null);
+	}
 }

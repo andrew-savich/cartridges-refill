@@ -10,7 +10,7 @@
 		<h1 th:if="${group.id == null}">Add new group</h1>
 		<h1 th:if="${group.id != null}">Edit group</h1>
 
-		<form action="#" th:action="@{/cartridgeGroups/save}" th:object="${group}"
+		<form action="#" th:action="@{/cartridgeGroups/saveGroup}" th:object="${group}"
 			method="post">
 			<div th:if="${group.id != null}" class="form-group">
 				<label>ID</label> <input type="text" class="form-control"
@@ -28,6 +28,7 @@
 			<a class="btn btn-primary btn-block"
 				th:href="@{'/cartridgeGroups/delete/' + ${group.id}}" role="button">Delete
 				group</a>
+		</div>
 		</div>
 		<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>

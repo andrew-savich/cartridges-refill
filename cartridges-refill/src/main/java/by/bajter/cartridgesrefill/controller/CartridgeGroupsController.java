@@ -12,17 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.bajter.cartridgesrefill.model.cartridges.CartridgeGroup;
+import by.bajter.cartridgesrefill.model.cartridges.CartridgeModel;
 import by.bajter.cartridgesrefill.services.CartridgeGroupService;
+import by.bajter.cartridgesrefill.services.CartrigeModelService;
 
 @Controller
 @RequestMapping("/cartridgeGroups")
 public class CartridgeGroupsController {
 	@Autowired
-	private CartridgeGroupService service;
+	private CartridgeGroupService groupService;
+
+	@Autowired
+	private CartrigeModelService modelService;
 
 	@RequestMapping("")
 	public String showGroupList(Model model) {
-		List<CartridgeGroup> cartridgeGroups = service.getAllCartridgeGroups();
+		List<CartridgeGroup> cartridgeGroups = groupService.getAllCartridgeGroups();
 
 		model.addAttribute("groups", cartridgeGroups);
 
@@ -38,17 +43,17 @@ public class CartridgeGroupsController {
 		return "groupAddEdit";
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveGroup", method = RequestMethod.POST)
 	public String saveNewGroup(@ModelAttribute("group") CartridgeGroup group) {
-		service.save(group);
+		groupService.save(group);
 
 		return "redirect:";
 	}
 
-	@RequestMapping("/edit/{id}")
+	@RequestMapping("/editGroup/{id}")
 	public ModelAndView showEditGroupView(@PathVariable(name = "id") Long id) {
 		ModelAndView modelAndView = new ModelAndView("groupAddEdit");
-		CartridgeGroup group = service.findById(id);
+		CartridgeGroup group = groupService.findById(id);
 
 		modelAndView.addObject("group", group);
 
@@ -57,9 +62,43 @@ public class CartridgeGroupsController {
 
 	@RequestMapping("/delete/{id}")
 	public String deleteGroup(@PathVariable(name = "id") Long id) {
-		service.deleteById(id);
+		groupService.deleteById(id);
 
 		return "redirect:/cartridgeGroups";
+	}
+
+	@RequestMapping("/{id}/newModel")
+	public String showNewCartridgeModelView(Model model, @PathVariable(name = "id") Long id) {
+		CartridgeModel cartridgeModel = new CartridgeModel();
+		CartridgeGroup cartridgeGroup = groupService.findById(id);
+
+		model.addAttribute("cartridgeModel", cartridgeModel);
+		model.addAttribute("cartridgeGroup", cartridgeGroup);
+
+		return "modelAddEdit";
+	}
+
+	@RequestMapping(value = "/{cartridgeGroupId}/saveModel", method = RequestMethod.POST)
+	public String saveCartidgeModel(@ModelAttribute("cartridgeModel") CartridgeModel cartridgeModel, @PathVariable(name = "cartridgeGroupId") Long cartridgeGroupId) {
+		CartridgeGroup cartridgeGroup = groupService.findById(cartridgeGroupId);
+		
+		cartridgeGroup.addCartridgeModel(cartridgeModel);
+		cartridgeModel.setGroup(cartridgeGroup);
+		
+		modelService.save(cartridgeModel);
+		groupService.save(cartridgeGroup);
+
+		return "redirect:/cartridgeGroups";
+	}
+	
+	@RequestMapping(value = "/editModel/{id}")
+	public String showEditModelView(Model model, @PathVariable(name = "id") Long id) {
+		CartridgeModel cartridgeModel = modelService.findById(id);
+
+		model.addAttribute("cartridgeModel", cartridgeModel);
+		model.addAttribute("cartridgeGroup", cartridgeModel.getGroup());
+
+		return "modelAddEdit";
 	}
 
 }

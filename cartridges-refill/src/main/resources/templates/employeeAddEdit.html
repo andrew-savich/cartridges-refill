@@ -34,8 +34,8 @@
 			</div>
 			<div class="form-group">
 				<label>Position</label> <select class="form-control" name="position">
-					<option form="new-employee-form" th:text="${employee.position}"></option>
-					<option form="new-employee-form"
+					<option th:text="${employee.position}"></option>
+					<option 
 						th:each="position : ${T(by.bajter.cartridgesrefill.model.employee.Position).values()}"
 						th:if="${employee.position != position}" th:value="${position}"
 						th:text="${position}"></option>
@@ -49,6 +49,7 @@
 			<a class="btn btn-primary btn-block"
 				th:href="@{'/employees/delete/' + ${employee.id}}" role="button">Delete
 				Employee</a>
+		</div>
 		</div>
 		<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>

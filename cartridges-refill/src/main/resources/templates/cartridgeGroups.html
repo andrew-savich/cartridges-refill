@@ -14,8 +14,8 @@
 				<tr>
 					<th th:text="${group.name}"></th>
 					<td>
-						<a class="btn btn-primary" th:href="@{'/cartridgeGroups/edit/' + ${group.id}}" role="button">Edit group</a>
-						<a class="btn btn-primary" th:href="@{'/cartridgeGroups/newModel/'}" role="button">Add new model</a>
+						<a class="btn btn-primary" th:href="@{'/cartridgeGroups/editGroup/' + ${group.id}}" role="button">Edit group</a>
+						<a class="btn btn-primary" th:href="@{'/cartridgeGroups/' + ${group.id} + '/newModel/'}" role="button">Add new model</a>
 					</td>
 												
 					<tr th:each="model : ${group.cartridgeModels}">
@@ -25,7 +25,7 @@
 						<td th:text="${model.defaultGrams}">Default grams</td>
 						<td th:text="${model.description}">Description</td>
 						<td><a class="btn btn-primary"
-							th:href="@{'/modelsAndGroups/editModel/' + ${model.id}}" role="button">Edit model</a>
+							th:href="@{'/cartridgeGroups/editModel/' + ${model.id}}" role="button">Edit model</a>
 						</td>
 					</tr>
 			</tbody>
