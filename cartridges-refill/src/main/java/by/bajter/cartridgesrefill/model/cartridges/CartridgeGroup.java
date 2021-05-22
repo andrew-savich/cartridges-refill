@@ -27,7 +27,7 @@ public class CartridgeGroup {
 	
 	@NotNull
 	@Column(unique = true)
-	private String name;
+	private String title;
 	
 	@ToString.Exclude
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
