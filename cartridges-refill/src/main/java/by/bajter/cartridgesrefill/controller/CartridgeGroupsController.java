@@ -80,6 +80,17 @@ public class CartridgeGroupsController {
 
 	@RequestMapping(value = "/{cartridgeGroupId}/saveModel", method = RequestMethod.POST)
 	public String saveCartidgeModel(@ModelAttribute("cartridgeModel") CartridgeModel cartridgeModel, @PathVariable(name = "cartridgeGroupId") Long cartridgeGroupId) {
+		System.out.println("we got cartridge: " + cartridgeModel);
+		
+		if(cartridgeModel.getGroup() != null) {
+			System.out.println("cartridge group isn't null");
+			modelService.save(cartridgeModel);
+			
+			return "redirect:/cartridgeGroups";
+		}
+		
+		System.out.println("cartridge group is null");
+		
 		CartridgeGroup cartridgeGroup = groupService.findById(cartridgeGroupId);
 		
 		cartridgeGroup.addCartridgeModel(cartridgeModel);

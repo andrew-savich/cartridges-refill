@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -29,6 +30,7 @@ public class CartridgeModel {
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@ToString.Exclude
 	private CartridgeGroup group;
 	
 	@Enumerated(EnumType.STRING)

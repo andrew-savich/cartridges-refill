@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -28,6 +29,7 @@ public class CartridgeGroup {
 	@Column(unique = true)
 	private String name;
 	
+	@ToString.Exclude
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CartridgeModel> cartridgeModels = new ArrayList<>();
 	
