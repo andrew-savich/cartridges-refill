@@ -7,10 +7,13 @@
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
 
 	<div class="mx-auto" style="width: 50%">
-		<h1 th:if="${cartridgeModel.id == null}" th:text="'Add new cartridge to ' + ${cartridgeGroup.title} + ' group'">Add new cartridge model</h1>
+		<h1 th:if="${cartridgeModel.id == null}"
+			th:text="'Add new cartridge to ' + ${cartridgeGroup.title} + ' group'">Add
+			new cartridge model</h1>
 		<h1 th:if="${cartridgeModel.id != null}">Edit cartridge model</h1>
 
-		<form action="#" th:action="@{'/cartridgeGroups/' + ${cartridgeGroup.id} + '/saveModel'}"
+		<form action="#"
+			th:action="@{'/cartridgeGroups/' + ${cartridgeGroup.id} + '/saveModel'}"
 			th:object="${cartridgeModel}" method="post">
 			<div th:if="${cartridgeModel.id != null}" class="form-group">
 				<label>CartridgeID</label> <input type="text" class="form-control"
@@ -21,10 +24,12 @@
 					th:field="*{name}">
 			</div>
 			<div th:if="${cartridgeModel.id != null}" class="form-group">
-				<label>Group</label> <input  type="text" class="form-control"
-					th:field="*{group}" readonly="readonly">
+				<label>Group</label> <input type="text" class="form-control"
+					th:field="*{group}" hidden="true"> <input type="text"
+					class="form-control" th:value="${cartridgeModel.group.title}"
+					readonly="readonly">
 			</div>
-			
+
 			<div class="form-group">
 				<label>Type</label> <select class="form-control" name="type">
 					<option th:text="${cartridgeModel.type}"></option>
@@ -58,10 +63,10 @@
 		</form>
 		<div th:if="${cartridgeModel.id != null}">
 			<a class="btn btn-primary btn-block"
-				th:href="@{'/cartridgeModels/delete/' + ${cartridgeModel.id}}" role="button">Delete
-				model</a>
+				th:href="@{'/cartridgeGroups/deleteModel/' + ${cartridgeModel.id}}"
+				role="button">Delete model</a>
 		</div>
-		</div>
-		<div th:insert="/common_view_parts/scripts :: scripts"></div>
+	</div>
+	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
 </html>

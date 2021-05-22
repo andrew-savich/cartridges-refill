@@ -85,7 +85,7 @@ public class CartridgeGroupsController {
 		System.out.println("we got cartridge: " + cartridgeModel);
 
 		if (cartridgeModel.getGroup() != null) {
-			System.out.println("cartridge group isn't null");
+			System.out.println("cartridge group isn't null: " + cartridgeModel.getGroup());
 			modelService.save(cartridgeModel);
 
 			return "redirect:/cartridgeGroups";
@@ -112,6 +112,17 @@ public class CartridgeGroupsController {
 		model.addAttribute("cartridgeGroup", cartridgeModel.getGroup());
 
 		return "modelAddEdit";
+	}
+	
+	@RequestMapping(value = "/deleteModel/{id}")
+	public String deleteModel(Model model, @PathVariable(name = "id") Long id) {
+		CartridgeModel cartridgeModel = modelService.findById(id);
+		CartridgeGroup cartridgeGroup = cartridgeModel.getGroup();
+
+		cartridgeGroup.removeCartridgeModel(cartridgeModel);
+		modelService.delete(cartridgeModel);
+
+		return "redirect:/cartridgeGroups";
 	}
 
 }
