@@ -30,7 +30,7 @@ public class CartridgeGroup {
 	private String title;
 	
 	@ToString.Exclude
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "group", cascade = CascadeType.MERGE, orphanRemoval = true)
 	private List<CartridgeModel> cartridgeModels = new ArrayList<>();
 	
 	public void addCartridgeModel(CartridgeModel cartridgeModel) {

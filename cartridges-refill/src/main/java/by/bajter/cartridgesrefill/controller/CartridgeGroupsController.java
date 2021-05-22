@@ -45,6 +45,7 @@ public class CartridgeGroupsController {
 
 	@RequestMapping(value = "/saveGroup", method = RequestMethod.POST)
 	public String saveNewGroup(@ModelAttribute("group") CartridgeGroup group) {
+
 		groupService.save(group);
 
 		return "redirect:";
@@ -79,29 +80,30 @@ public class CartridgeGroupsController {
 	}
 
 	@RequestMapping(value = "/{cartridgeGroupId}/saveModel", method = RequestMethod.POST)
-	public String saveCartidgeModel(@ModelAttribute("cartridgeModel") CartridgeModel cartridgeModel, @PathVariable(name = "cartridgeGroupId") Long cartridgeGroupId) {
+	public String saveCartidgeModel(@ModelAttribute("cartridgeModel") CartridgeModel cartridgeModel,
+			@PathVariable(name = "cartridgeGroupId") Long cartridgeGroupId) {
 		System.out.println("we got cartridge: " + cartridgeModel);
-		
-		if(cartridgeModel.getGroup() != null) {
+
+		if (cartridgeModel.getGroup() != null) {
 			System.out.println("cartridge group isn't null");
 			modelService.save(cartridgeModel);
-			
+
 			return "redirect:/cartridgeGroups";
 		}
-		
+
 		System.out.println("cartridge group is null");
-		
+
 		CartridgeGroup cartridgeGroup = groupService.findById(cartridgeGroupId);
-		
+
 		cartridgeGroup.addCartridgeModel(cartridgeModel);
 		cartridgeModel.setGroup(cartridgeGroup);
-		
+
 		modelService.save(cartridgeModel);
 		groupService.save(cartridgeGroup);
 
 		return "redirect:/cartridgeGroups";
 	}
-	
+
 	@RequestMapping(value = "/editModel/{id}")
 	public String showEditModelView(Model model, @PathVariable(name = "id") Long id) {
 		CartridgeModel cartridgeModel = modelService.findById(id);
