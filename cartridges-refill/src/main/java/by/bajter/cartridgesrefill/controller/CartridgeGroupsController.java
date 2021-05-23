@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.bajter.cartridgesrefill.model.cartridges.CartridgeGroup;
@@ -43,7 +43,7 @@ public class CartridgeGroupsController {
 		return "groupAddEdit";
 	}
 
-	@RequestMapping(value = "/saveGroup", method = RequestMethod.POST)
+	@PostMapping(value = "/saveGroup")
 	public String saveNewGroup(@ModelAttribute("group") CartridgeGroup group) {
 
 		groupService.save(group);
@@ -79,19 +79,15 @@ public class CartridgeGroupsController {
 		return "modelAddEdit";
 	}
 
-	@RequestMapping(value = "/{cartridgeGroupId}/saveModel", method = RequestMethod.POST)
+	@PostMapping(value = "/{cartridgeGroupId}/saveModel")
 	public String saveCartidgeModel(@ModelAttribute("cartridgeModel") CartridgeModel cartridgeModel,
 			@PathVariable(name = "cartridgeGroupId") Long cartridgeGroupId) {
-		System.out.println("we got cartridge: " + cartridgeModel);
 
 		if (cartridgeModel.getGroup() != null) {
-			System.out.println("cartridge group isn't null: " + cartridgeModel.getGroup());
 			modelService.save(cartridgeModel);
 
 			return "redirect:/cartridgeGroups";
 		}
-
-		System.out.println("cartridge group is null");
 
 		CartridgeGroup cartridgeGroup = groupService.findById(cartridgeGroupId);
 
