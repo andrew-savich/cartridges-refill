@@ -2,6 +2,32 @@
 <html xmlns:th="http://www.thymleaf.org">
 <head>
 <div th:replace="/common_view_parts/header :: myheader"></div>
+
+<div th:insert="/common_view_parts/scripts :: scripts"></div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#comboboxGroup').on('change', function(){
+		var groupId = $(this).val();
+		$.ajax({
+			type: 'GET', 
+			url: "[[@{/cartridges/loadModelsByGroup/}]]" + groupId ,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					alert(result[i].name);
+					s += '<option th:value="${' + result[i] + '}" >' + result[i].name + '</option>';
+					alert(s);   
+				}
+				$('#comboboxModel').html(s);
+			}
+		});
+	});
+
+});
+</script>
+
 </head>
 <body>
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
@@ -31,15 +57,14 @@
 			</div>
 			<div class="form-group">
 				<label>Group</label>
-					<select class="form-control">
+					<select class="form-control" id="comboboxGroup">
 						<option th:text="${cartridge.cartridgeModel}"></option>
-						<option th:each="group : ${groups}" th:value="${group}" th:text="${group.title}"></option>
+						<option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.title}"></option>
 					</select>
 			</div>
 			<div class="form-group">
 				<label>Model</label>
-					<select class="form-control">
-						<option >some model</option>
+					<select class="form-control" id="comboboxModel">
 					</select>
 			</div>
 			<div class="form-group">
@@ -57,6 +82,6 @@
 				Client</a>
 		</div>
 		</div>
-		<div th:insert="/common_view_parts/scripts :: scripts"></div>
+		
 </body>
 </html>

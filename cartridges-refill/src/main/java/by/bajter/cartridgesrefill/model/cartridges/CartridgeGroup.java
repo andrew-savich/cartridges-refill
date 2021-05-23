@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.google.gson.annotations.Expose;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,10 +24,12 @@ import lombok.NoArgsConstructor;
 public class CartridgeGroup {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private Long id;
 	
 	@NotNull
 	@Column(unique = true)
+	@Expose
 	private String title;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "group", cascade = CascadeType.MERGE, orphanRemoval = true)

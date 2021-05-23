@@ -32,4 +32,5 @@ public class CartridgeGroupService {
 	public CartridgeGroup findById(long id) {
 		return repository.findById(id).get();
 	}
+	
 }

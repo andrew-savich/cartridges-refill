@@ -5,7 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import by.bajter.cartridgesrefill.model.cartridges.Cartridge;
 import by.bajter.cartridgesrefill.model.cartridges.CartridgeGroup;
@@ -52,5 +57,15 @@ public class CartridgeController {
 		return "cartridgeAddEdit";
 	}
 	
+	
+	@RequestMapping(value = "loadModelsByGroup/{id}")
+	@ResponseBody
+	public String loadModelsByGroup(@PathVariable("id") Long id) {
+		System.out.println("got from page group.id: " + id);
+		CartridgeGroup group = cartridgeGroupService.findById(id);
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		
+		return gson.toJson(group.getCartridgeModels());
+	}
 	
 }
