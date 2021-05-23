@@ -1,4 +1,4 @@
-package by.bajter.cartridgesrefill.controller;
+package by.bajter.cartridgesrefill.controllers;
 
 import java.util.List;
 
@@ -7,9 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import by.bajter.cartridgesrefill.model.employee.Employee;
 import by.bajter.cartridgesrefill.services.EmployeeService;
@@ -38,7 +37,7 @@ public class EmployeeController {
 		return "employeeAddEdit";
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@PostMapping(value = "/save")
 	public String saveNewEmployee(@ModelAttribute("employee") Employee employee) {
 		service.save(employee);
 
@@ -46,13 +45,12 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("/edit/{id}")
-	public ModelAndView showEditEmployeeView(@PathVariable(name = "id") Long id) {
-		ModelAndView modelAndView = new ModelAndView("employeeAddEdit");
+	public String showEditEmployeeView(@PathVariable(name = "id") Long id, Model model) {
 		Employee employee = service.findById(id);
 		
-		modelAndView.addObject("employee", employee);
+		model.addAttribute("employee", employee);
 		
-		return modelAndView;
+		return "employeeAddEdit";
 	}
 	
 	@RequestMapping("/delete/{id}")

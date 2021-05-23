@@ -30,7 +30,7 @@
 					<td></td>
 					<td></td>
 					<td>
-						<a class="btn btn-primary" th:href="@{'/cartridgeGroups/editGroup/' + ${group.id}}"	role="button">Edit group</a>
+						<a class="btn btn-primary" th:href="@{'/cartridgeModelGroups/editGroup/' + ${group.id}}"	role="button">Edit group</a>
 					</td>
 				<tr th:each="model : ${group.cartridgeModels}">
 					<td></td>
@@ -40,12 +40,12 @@
 					<td th:text="${model.defaultGrams}">Default grams</td>
 					<td th:text="${model.description}">Description</td>
 					<td><a class="btn btn-primary"
-						th:href="@{'/cartridgeGroups/editModel/' + ${model.id}}"
+						th:href="@{'/cartridgeModelGroups/editModel/' + ${model.id}}"
 						role="button">Edit</a></td>
 				</tr>
 				<tr>
 					<td>
-						<a class="btn btn-primary" th:href="@{'/cartridgeGroups/' + ${group.id} + '/newModel/'}"role="button">Add new model</a>
+						<a class="btn btn-primary" th:href="@{'/cartridgeModelGroups/' + ${group.id} + '/newModel/'}"role="button">Add new model</a>
 					</td>
 					<td></td>
 					<td></td>
@@ -58,7 +58,7 @@
 			</tbody>
 
 		</table>
-		<form action="/cartridgeGroups/new">
+		<form action="/cartridgeModelGroups/new">
 			<button type="submit" class="btn btn-primary">Add new group</button>
 		</form>
 	</div>

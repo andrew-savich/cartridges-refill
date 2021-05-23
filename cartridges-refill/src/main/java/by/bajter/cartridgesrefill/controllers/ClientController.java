@@ -1,4 +1,4 @@
-package by.bajter.cartridgesrefill.controller;
+package by.bajter.cartridgesrefill.controllers;
 
 import java.util.List;
 
@@ -7,9 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import by.bajter.cartridgesrefill.model.client.Client;
 import by.bajter.cartridgesrefill.services.ClientService;
@@ -37,7 +36,7 @@ public class ClientController {
 		return "clientAddEdit";
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@PostMapping(value = "/save")
 	public String saveNewClient(@ModelAttribute("client") Client client) {
 		service.save(client);
 
@@ -45,13 +44,12 @@ public class ClientController {
 	}
 
 	@RequestMapping("/edit/{id}")
-	public ModelAndView showEditClientView(@PathVariable(name = "id") Long id) {
-		ModelAndView modelAndView = new ModelAndView("clientAddEdit");
+	public String showEditClientView(@PathVariable(name = "id") Long id, Model model) {
 		Client client = service.findById(id);
 
-		modelAndView.addObject("client", client);
+		model.addAttribute("client", client);
 
-		return modelAndView;
+		return "clientAddEdit";
 	}
 
 	@RequestMapping("/delete/{id}")
