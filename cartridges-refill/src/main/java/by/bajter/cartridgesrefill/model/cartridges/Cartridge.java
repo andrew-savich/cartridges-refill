@@ -2,6 +2,7 @@ package by.bajter.cartridgesrefill.model.cartridges;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +15,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import by.bajter.cartridgesrefill.model.client.Client;
-import by.bajter.cartridgesrefill.services.UniqIdentifyGenerator;
 import lombok.Data;
 
 @Entity
@@ -25,15 +25,8 @@ public class Cartridge {
 	private Long id;
 	
 	public Cartridge() {
-		this.uniqIdentify = UniqIdentifyGenerator.generate();
 	}
 
-	public Cartridge(@NotNull String uniqIdentify, @NotNull CartridgeModel cartridgeModel, @NotNull Client client) {
-		this.uniqIdentify = uniqIdentify;
-		this.cartridgeModel = cartridgeModel;
-		this.client = client;
-	}
-	
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date addDate;
@@ -43,10 +36,10 @@ public class Cartridge {
 	private String uniqIdentify;
 	
 	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private CartridgeModel cartridgeModel;
 	
 	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Client client;
 }

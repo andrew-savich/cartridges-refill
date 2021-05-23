@@ -10,13 +10,16 @@ import by.bajter.cartridgesrefill.repository.CartridgeRepository;
 
 @Service
 public class CartridgeService {
+	// tempory
+	private int count = 2000;
+
 	@Autowired
 	private CartridgeRepository repository;
-	
-	public List<Cartridge> getAllCartridges(){
+
+	public List<Cartridge> getAllCartridges() {
 		return repository.findAll();
 	}
-	
+
 	public void save(Cartridge cartridge) {
 		repository.save(cartridge);
 	}
@@ -24,12 +27,17 @@ public class CartridgeService {
 	public void delete(Cartridge cartridge) {
 		repository.delete(cartridge);
 	}
-	
+
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
 
 	public Cartridge findById(long id) {
 		return repository.findById(id).get();
+	}
+
+	public String getUniqIdentify() {
+
+		return "B" + count++;
 	}
 }

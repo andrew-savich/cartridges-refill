@@ -8,9 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import by.bajter.cartridgesrefill.model.cartridges.Cartridge;
+import by.bajter.cartridgesrefill.model.cartridges.CartridgeGroup;
+import by.bajter.cartridgesrefill.model.client.Client;
 import by.bajter.cartridgesrefill.services.CartridgeGroupService;
 import by.bajter.cartridgesrefill.services.CartridgeService;
-import by.bajter.cartridgesrefill.services.CartrigeModelService;
 import by.bajter.cartridgesrefill.services.ClientService;
 
 @Controller
@@ -24,9 +25,6 @@ public class CartridgeController {
 	private CartridgeGroupService cartridgeGroupService;
 	
 	@Autowired
-	private CartrigeModelService cartridgeModelService;
-	
-	@Autowired
 	private ClientService clientService;
 	
 	
@@ -37,6 +35,21 @@ public class CartridgeController {
 		model.addAttribute("cartridges", cartridges);
 		
 		return "cartridges";
+	}
+	
+	@RequestMapping("/new")
+	public String showAddCartridgeView(Model model) {
+		Cartridge cartridge = new Cartridge(); 
+		cartridge.setUniqIdentify(cartridgeService.getUniqIdentify());
+		
+		List<CartridgeGroup> cartridgeGroups = cartridgeGroupService.getAllCartridgeGroups();
+		List<Client> clients = clientService.getAllClients();
+		
+		model.addAttribute("cartridge", cartridge);
+		model.addAttribute("groups", cartridgeGroups);
+		model.addAttribute("clients", clients);
+		
+		return "cartridgeAddEdit";
 	}
 	
 	
