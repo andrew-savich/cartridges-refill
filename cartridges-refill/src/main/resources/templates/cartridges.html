@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymleaf.org">
 <head>
-<div th:replace="/parts/header :: myheader"></div>
+<div th:replace="/common_view_parts/header :: myheader"></div>
 </head>
 <body>
-	<div th:insert="/parts/navbar :: navbar"></div>
-	<h1>Cartridges</h1>
+	<div th:insert="/common_view_parts/navbar :: navbar"></div>
+
+	<div class="mx-auto" style="width: 80%">
+		<h1>Cartridges</h1>
+
+		<table class="table table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th>ID</th>
+					<th>Unique Identity</th>
+					<th>Client</th>
+					<th>Group</th>
+					<th>Model</th>
+					<th>Adding Date</th>
+					<th>Info</th>
+				</tr>
+			</thead>
+			<tbody >
+				<tr th:each="cartridge : ${cartridges}">
+					<td th:text="${cartridge.id}"></td>
+					<td th:text="${cartridge.uniqIdentify}"></td>
+					<td th:text="${cartridge.client}"></td>
+					<td th:text="${cartridge.model.group.title}"></td>
+					<td th:text="${cartridge.model.name}"></td>
+					<td th:text="${cartridge.addDate}"></td>
+					<td th:text="">Some info</td>
+					<td>
+						<a class="btn btn-primary" th:href="@{'/cartridges/edit/' + ${cartridge.id}}"	role="button">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+		<form action="/cartridge/cartridgeAddEdit">
+			<button type="submit" class="btn btn-primary">Add new cartridge</button>
+		</form>
+	</div>
+	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
-<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </html>

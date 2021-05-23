@@ -16,4 +16,20 @@ public class CartridgeService {
 	public List<Cartridge> getAllCartridges(){
 		return repository.findAll();
 	}
+	
+	public void save(Cartridge cartridge) {
+		repository.save(cartridge);
+	}
+
+	public void delete(Cartridge cartridge) {
+		repository.delete(cartridge);
+	}
+	
+	public void deleteById(Long id) {
+		repository.deleteById(id);
+	}
+
+	public Cartridge findById(long id) {
+		return repository.findById(id).get();
+	}
 }
