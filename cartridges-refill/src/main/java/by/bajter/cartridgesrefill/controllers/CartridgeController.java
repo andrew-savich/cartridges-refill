@@ -50,8 +50,6 @@ public class CartridgeController {
 		cartridge.setUniqIdentify(cartridgeService.getUniqIdentify());
 		cartridge.setAddedDate(new Date());
 
-		System.out.println(cartridge.getAddedDate());
-
 		List<CartridgeGroup> cartridgeGroups = cartridgeGroupService.getAllCartridgeGroups();
 		List<Client> clients = clientService.getAllClients();
 
@@ -65,7 +63,6 @@ public class CartridgeController {
 	@RequestMapping(value = "loadModelsByGroup/{id}")
 	@ResponseBody
 	public String loadModelsByGroup(@PathVariable("id") Long id) {
-		System.out.println("got from page group.id: " + id);
 		CartridgeGroup group = cartridgeGroupService.findById(id);
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
@@ -74,10 +71,22 @@ public class CartridgeController {
 
 	@PostMapping(value = "/save")
 	public String saveCartridge(@ModelAttribute("cartridge") Cartridge cartridge) {
-		System.out.println("We got cartridge: " + cartridge);
 		cartridgeService.save(cartridge);
 
 		return "redirect:";
+	}
+	
+	@RequestMapping("/edit/{id}")
+	public String showEditCartridgeView(@PathVariable(name = "id") Long id, Model model) {
+		Cartridge cartridge = cartridgeService.findById(id);
+		List<CartridgeGroup> cartridgeGroups = cartridgeGroupService.getAllCartridgeGroups();
+		List<Client> clients = clientService.getAllClients();
+
+		model.addAttribute("cartridge", cartridge);
+		model.addAttribute("groups", cartridgeGroups);
+		model.addAttribute("clients", clients);
+
+		return "cartridgeAddEdit";
 	}
 
 }

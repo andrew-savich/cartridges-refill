@@ -20,7 +20,7 @@
 																	.parse(result);
 															var s = '';
 															for (var i = 0; i < result.length; i++) {
-																s += '<option value=' + result[i].id + '>' + result[i].name + '</option>';
+																s += '<option th:if="${cartridge.cartridgeModel.id != ' + result[i].id + '.id}" value=' + result[i].id + '>' + result[i].name + '</option>';
 															}
 															$('#comboboxModel')
 																	.html(s);
@@ -49,21 +49,26 @@
 				<label>UniqueIdentify</label> <input type="text"
 					class="form-control" th:field="*{uniqIdentify}">
 			</div>
-			<div class="form-group">
-				<label>Client</label> <select th:field="*{client}" class="form-control">
-					<option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name}"></option>
-				</select>
+			<div  class="form-group">
+				<label>Client</label>
+					<select th:field="*{client}" class="form-control">
+						<option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name}" th:selected="${client == cartridge.client}"></option>
+					</select>
 			</div>
 			<div class="form-group">
-				<label>Group</label> <select class="form-control" id="comboboxGroup">
-					<option th:text="${cartridge.cartridgeModel}"></option>
-					<option th:each="group : ${groups}" th:value="${group.id}"
-						th:text="${group.title}"></option>
-				</select>
+				<label>Group</label>
+					<select class="form-control" id="comboboxGroup">
+						<option th:if="${cartridge.id == null}" disabled selected value=""> -- select group -- </option>
+						<option th:if="${cartridge.id != null}" th:value="${cartridge.cartridgeModel.group.id}" th:text="${cartridge.cartridgeModel.group.title}"></option>
+						<option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.title}"></option>
+					</select>
 			</div>
 			<div class="form-group">
-				<label>Model</label> <select th:field="*{cartridgeModel}" class="form-control" id="comboboxModel">
-				</select>
+				<label>Model</label>
+					<select th:field="*{cartridgeModel}" class="form-control" id="comboboxModel">
+						<option th:if="${cartridge.id != null}" th:value="${cartridge.cartridgeModel.id}" th:text="${cartridge.cartridgeModel.name}"></option>
+					</select>
+					
 			</div>
 			<div class="form-group">
 				<label>Date</label> <input class="form-control" type="text"
@@ -75,7 +80,7 @@
 		</form>
 		<div th:if="${cartridge.id != null}">
 			<a class="btn btn-primary btn-block"
-				th:href="@{'/cartridgess/delete/' + ${cartridge.id}}" role="button">Delete
+				th:href="@{'/cartridges/delete/' + ${cartridge.id}}" role="button">Delete
 				Cartridge</a>
 		</div>
 	</div>

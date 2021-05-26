@@ -13,6 +13,8 @@ import by.bajter.cartridgesrefill.repository.CartridgeRepository;
 @Service
 public class CartridgeService {
 
+	private final String STARTER_UNIQ_IDENTIFY = "B2000";
+	
 	@Autowired
 	private CartridgeRepository repository;
 
@@ -38,6 +40,10 @@ public class CartridgeService {
 
 	public String getUniqIdentify() {
 		List<Cartridge> sortedCartridges = repository.findAll().stream().sorted(Comparator.comparing(Cartridge::getUniqIdentify)).collect(Collectors.toList());
+		
+		if(sortedCartridges.isEmpty()) {
+			return STARTER_UNIQ_IDENTIFY;
+		}
 		
 		int lastCartridgesIndex = sortedCartridges.size() - 1;
 		
