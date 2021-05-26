@@ -77,7 +77,7 @@ public class CartridgeController {
 		System.out.println("We got cartridge: " + cartridge);
 		cartridgeService.save(cartridge);
 
-		return "";
+		return "redirect:";
 	}
 
 }
