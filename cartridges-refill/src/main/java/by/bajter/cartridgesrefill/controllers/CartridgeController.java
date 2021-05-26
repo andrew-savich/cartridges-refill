@@ -1,5 +1,6 @@
 package by.bajter.cartridgesrefill.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,44 +29,45 @@ public class CartridgeController {
 
 	@Autowired
 	private CartridgeGroupService cartridgeGroupService;
-	
+
 	@Autowired
 	private ClientService clientService;
-	
-	
+
 	@RequestMapping("")
 	public String showCartridgesView(Model model) {
 		List<Cartridge> cartridges = cartridgeService.getAllCartridges();
-		
+
 		model.addAttribute("cartridges", cartridges);
-		
+
 		return "cartridges";
 	}
-	
+
 	@RequestMapping("/new")
 	public String showAddCartridgeView(Model model) {
-		Cartridge cartridge = new Cartridge(); 
+		Cartridge cartridge = new Cartridge();
 		cartridge.setUniqIdentify(cartridgeService.getUniqIdentify());
+		cartridge.setAddedDate(new Date());
 		
+		System.out.println(cartridge.getAddedDate());
+
 		List<CartridgeGroup> cartridgeGroups = cartridgeGroupService.getAllCartridgeGroups();
 		List<Client> clients = clientService.getAllClients();
-		
+
 		model.addAttribute("cartridge", cartridge);
 		model.addAttribute("groups", cartridgeGroups);
 		model.addAttribute("clients", clients);
-		
+
 		return "cartridgeAddEdit";
 	}
-	
-	
+
 	@RequestMapping(value = "loadModelsByGroup/{id}")
 	@ResponseBody
 	public String loadModelsByGroup(@PathVariable("id") Long id) {
 		System.out.println("got from page group.id: " + id);
 		CartridgeGroup group = cartridgeGroupService.findById(id);
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		
+
 		return gson.toJson(group.getCartridgeModels());
 	}
-	
+
 }

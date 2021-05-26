@@ -16,9 +16,7 @@ $(document).ready(function(){
 				var result = JSON.parse(result);
 				var s = '';
 				for(var i = 0; i < result.length; i++) {
-					alert(result[i].name);
-					s += '<option th:value="${' + result[i] + '}" >' + result[i].name + '</option>';
-					alert(s);   
+					s += '<option th:value="${' + result[i].id + '}" >' + result[i].name + '</option>';
 				}
 				$('#comboboxModel').html(s);
 			}
@@ -27,8 +25,8 @@ $(document).ready(function(){
 
 });
 </script>
-
 </head>
+
 <body>
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
 
@@ -68,10 +66,9 @@ $(document).ready(function(){
 					</select>
 			</div>
 			<div class="form-group">
-				<label>Date</label> <input type="text" class="form-control"
-					value="Some date">
-			</div>
-			
+      	    <label>Date</label>
+        		<input class="form-control" type="text" th:field="*{addedDate}" placeholder="date" readonly="readonly"/>
+   			 </div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
@@ -79,7 +76,7 @@ $(document).ready(function(){
 		<div th:if="${cartridge.id != null}">
 			<a class="btn btn-primary btn-block"
 				th:href="@{'/cartridgess/delete/' + ${cartridge.id}}" role="button">Delete
-				Client</a>
+				Cartridge</a>
 		</div>
 		</div>
 		
