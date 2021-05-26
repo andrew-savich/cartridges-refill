@@ -1,6 +1,8 @@
 package by.bajter.cartridgesrefill.services;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +12,6 @@ import by.bajter.cartridgesrefill.repository.CartridgeRepository;
 
 @Service
 public class CartridgeService {
-	// tempory
-	private int count = 2000;
 
 	@Autowired
 	private CartridgeRepository repository;
@@ -37,7 +37,14 @@ public class CartridgeService {
 	}
 
 	public String getUniqIdentify() {
+		List<Cartridge> sortedCartridges = repository.findAll().stream().sorted(Comparator.comparing(Cartridge::getUniqIdentify)).collect(Collectors.toList());
+		
+		int lastCartridgesIndex = sortedCartridges.size() - 1;
+		
+		String lastUniqIdentifyStr = sortedCartridges.get(lastCartridgesIndex).getUniqIdentify();
+		
+		int lastUniqIdentifyNum = Integer.parseInt(lastUniqIdentifyStr.substring(1));
 
-		return "B" + count++;
+		return "B" + ++lastUniqIdentifyNum;
 	}
 }
