@@ -1,7 +1,5 @@
 package by.bajter.cartridgesrefill.model.cartridges;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.CascadeType;

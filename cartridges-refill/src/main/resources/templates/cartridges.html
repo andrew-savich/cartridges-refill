@@ -25,11 +25,11 @@
 				<tr th:each="cartridge : ${cartridges}">
 					<td th:text="${cartridge.id}"></td>
 					<td th:text="${cartridge.uniqIdentify}"></td>
-					<td th:text="${cartridge.client}"></td>
-					<td th:text="${cartridge.model.group.title}"></td>
-					<td th:text="${cartridge.model.name}"></td>
-					<td th:text="${cartridge.addDate}"></td>
-					<td th:text="">Some info</td>
+					<td th:text="${cartridge.client.name}"></td>
+					<td th:text="${cartridge.cartridgeModel.group.title}"></td>
+					<td th:text="${cartridge.cartridgeModel.name}"></td>
+					<td th:text="${cartridge.addedDate}"></td>
+					<td>Some info</td>
 					<td>
 						<a class="btn btn-primary" th:href="@{'/cartridges/edit/' + ${cartridge.id}}"	role="button">Edit</a>
 					</td>

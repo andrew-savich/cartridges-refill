@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,7 +49,7 @@ public class CartridgeController {
 		Cartridge cartridge = new Cartridge();
 		cartridge.setUniqIdentify(cartridgeService.getUniqIdentify());
 		cartridge.setAddedDate(new Date());
-		
+
 		System.out.println(cartridge.getAddedDate());
 
 		List<CartridgeGroup> cartridgeGroups = cartridgeGroupService.getAllCartridgeGroups();
@@ -68,6 +70,14 @@ public class CartridgeController {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
 		return gson.toJson(group.getCartridgeModels());
+	}
+
+	@PostMapping(value = "/save")
+	public String saveCartridge(@ModelAttribute("cartridge") Cartridge cartridge) {
+		System.out.println("We got cartridge: " + cartridge);
+		cartridgeService.save(cartridge);
+
+		return "";
 	}
 
 }
