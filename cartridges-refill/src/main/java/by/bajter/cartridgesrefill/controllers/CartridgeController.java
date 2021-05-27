@@ -88,5 +88,13 @@ public class CartridgeController {
 
 		return "cartridgeAddEdit";
 	}
-
+	
+	@RequestMapping(value="/delete/{id}")
+	public String deleteCArtridge(@PathVariable(name = "id") Long id) {
+		cartridgeService.deleteById(id);
+		
+		return "redirect:/cartridges";
+	}
+	
+	
 }
