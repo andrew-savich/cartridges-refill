@@ -2,6 +2,7 @@ package by.bajter.cartridgesrefill.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,17 +28,17 @@ public class Refill {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	private Date fillDate;
+	private Date refillDate;
 	
 	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Cartridge cartridge;
 	
 	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Employee refueller;
 	
-	private Integer actualGramsToner;
+	private Integer actualGrams;
 	
 	private Boolean changedDrum;
 

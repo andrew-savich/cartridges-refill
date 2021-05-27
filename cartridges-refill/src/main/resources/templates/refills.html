@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<div th:replace="/common_view_parts/header :: myheader"></div>
+</head>
+<body>
+	<div th:insert="/common_view_parts/navbar :: navbar"></div>
+
+	<div class="mx-auto" style="width: 80%">
+		<h1>Refills</h1>
+
+		<table class="table table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th>ID</th>
+					<th>Refill date</th>
+					<th>Uniq Identify</th>
+					<th>Client</th>
+					<th>Group</th>
+					<th>Model</th>
+					<th>Grams</th>
+					<th>Comment</th>
+				</tr>
+			</thead>
+			<tbody >
+				<tr th:each="refill : ${refills}">
+					<td th:text="${refill.id}"></td>
+					<td th:text="${refill.refillDate}"></td>
+					<td th:text="${refill.cartridge.uniqIdentify}"></td>
+					<td th:text="${refill.cartridge.client.name}"></td>
+					<td th:text="${refill.cartridge.cartridgeModel.group.title}"></td>
+					<td th:text="${refill.cartridge.cartridgeModel.name}"></td>
+					<td th:text="${refill.actualGrams}"></td>
+					
+					<td th:text="${refill.comment}"></td>
+					<td>
+						<a class="btn btn-primary" th:href="@{'/refills/edit/' + ${refill.id}}"	role="button">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+		<form action="/refills/new">
+			<button type="submit" class="btn btn-primary">Add new refill</button>
+		</form>
+	</div>
+	<div th:insert="/common_view_parts/scripts :: scripts"></div>
+</body>
+</html>

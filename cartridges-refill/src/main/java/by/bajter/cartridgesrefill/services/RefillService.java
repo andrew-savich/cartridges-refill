@@ -13,7 +13,7 @@ public class RefillService {
 	@Autowired
 	private RefillRepository repository;
 	
-	List<Refill> getAllReffils(){
+	public List<Refill> getAllReffils(){
 		return repository.findAll();
 	}
 	
