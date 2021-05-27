@@ -16,4 +16,21 @@ public class RefillService {
 	List<Refill> getAllReffils(){
 		return repository.findAll();
 	}
+	
+	public void save(Refill refill) {
+		repository.save(refill);
+	}
+
+	public void delete(Refill refill) {
+		repository.delete(refill);
+	}
+
+	public void deleteById(Long id) {
+		repository.deleteById(id);
+	}
+
+	public Refill findById(long id) {
+		return repository.findById(id).get();
+	}
+	
 }
