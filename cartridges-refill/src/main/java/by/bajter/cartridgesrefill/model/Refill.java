@@ -13,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import by.bajter.cartridgesrefill.model.cartridges.Cartridge;
 import by.bajter.cartridgesrefill.model.employee.Employee;
 import lombok.Data;
@@ -27,6 +29,7 @@ public class Refill {
 	private Long id;
 
 	@NotNull
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date refillDate;
 	

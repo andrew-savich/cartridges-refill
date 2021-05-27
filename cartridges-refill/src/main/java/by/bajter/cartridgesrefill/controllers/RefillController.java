@@ -1,5 +1,6 @@
 package by.bajter.cartridgesrefill.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,15 @@ public class RefillController {
 			model.addAttribute("refills", refills);
 					
 			return "refills";
+		}
+		
+		@RequestMapping("/new")
+		public String showAddRefillView(Model model) {
+			Refill refill = new Refill();
+			refill.setRefillDate(new Date());
+
+			model.addAttribute("refill", refill);
+
+			return "refillAddEdit";
 		}
 }
