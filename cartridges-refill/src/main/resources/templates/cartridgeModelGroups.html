@@ -9,6 +9,14 @@
 	<div class="mx-auto" style="width: 80%">
 		<h1>Cartridge Groups</h1>
 
+		<form action="#" th:action="@{/cartridgeModelGroups/saveGroup}" th:object="${newGroup}" method="post" class="form-inline">
+			<div class="form-group mx-sm-3 mb-2">
+				<label for="newGroupTitle" class="sr-only">Title</label>
+				<input type="text" id="newGroupTitle" th:field="*{title}" class="form-control" placeholder="Title">
+			</div>
+			<button type="submit" class="btn btn-primary mb-2">Add new group</button>
+		</form>
+
 		<table class="table table-sm">
 			<thead class="thead-light">
 				<tr>
@@ -29,9 +37,9 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>
-						<a class="btn btn-primary" th:href="@{'/cartridgeModelGroups/editGroup/' + ${group.id}}"	role="button">Edit group</a>
-					</td>
+					<td><a class="btn btn-primary"
+						th:href="@{'/cartridgeModelGroups/editGroup/' + ${group.id}}"
+						role="button">Edit group</a></td>
 				<tr th:each="model : ${group.cartridgeModels}">
 					<td></td>
 					<td th:text="${model.name}">Name</td>
@@ -44,10 +52,10 @@
 						role="button">Edit</a></td>
 				</tr>
 				<tr>
-					<td>
-						<a class="btn btn-primary" th:href="@{'/cartridgeModelGroups/' + ${group.id} + '/newModel/'}"role="button">Add new model</a>
-					</td>
 					<td></td>
+					<td><a class="btn btn-primary"
+						th:href="@{'/cartridgeModelGroups/' + ${group.id} + '/newModel/'}"
+						role="button">Add new model</a></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -58,9 +66,8 @@
 			</tbody>
 
 		</table>
-		<form action="/cartridgeModelGroups/new">
-			<button type="submit" class="btn btn-primary">Add new group</button>
-		</form>
+
+
 	</div>
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>

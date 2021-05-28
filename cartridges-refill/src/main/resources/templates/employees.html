@@ -12,19 +12,20 @@
 		<table class="table table-hover table-sm">
 			<thead>
 				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Full Name</th>
-					<th scope="col">Position</th>
-					<th scope="col">Login</th>
+					<th>#</th>
+					<th>Full Name</th>
+					<th>Position</th>
+					<th>Login</th>
+					<th>Password</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="employee : ${employees}">
-					<th scope="row" th:text="${employee.id}">Employee ID</th>
-					<td th:text="${employee.name} +' ' + ${employee.surname}">Full
-						name</td>
-					<td th:text="${employee.position}">Position</td>
-					<td th:text="${employee.login}">Login</td>
+					<th th:text="${employee.id}"></th>
+					<td th:text="${employee.name} +' ' + ${employee.surname}"></td>
+					<td th:text="${employee.position}"></td>
+					<td th:text="${employee.login}"></td>
+					<td th:text="${employee.password}"></td>
 					<td><a class="btn btn-primary"
 						th:href="@{'/employees/edit/' + ${employee.id}}" role="button">Edit</a>
 					</td>

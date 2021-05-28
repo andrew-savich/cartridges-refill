@@ -27,20 +27,14 @@ public class CartridgeModelGroupsController {
 	@RequestMapping("")
 	public String showGroupList(Model model) {
 		List<CartridgeGroup> cartridgeGroups = groupService.getAllCartridgeGroups();
+		CartridgeGroup newGroup = new CartridgeGroup();
 
 		model.addAttribute("groups", cartridgeGroups);
+		model.addAttribute("newGroup", newGroup);
 
 		return "/cartridgeModelGroups";
 	}
 
-	@RequestMapping("/new")
-	public String showViewNewGroup(Model model) {
-		CartridgeGroup group = new CartridgeGroup();
-
-		model.addAttribute("group", group);
-
-		return "groupAddEdit";
-	}
 
 	@PostMapping(value = "/saveGroup")
 	public String saveNewGroup(@ModelAttribute("group") CartridgeGroup group) {
@@ -56,7 +50,7 @@ public class CartridgeModelGroupsController {
 
 		model.addAttribute("group", group);
 
-		return "groupAddEdit";
+		return "groupEdit";
 	}
 
 	@RequestMapping("/delete/{id}")
