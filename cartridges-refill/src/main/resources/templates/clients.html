@@ -31,15 +31,17 @@
 					<tr>
 						<td></td>
 						<td><input type="text" class="form-control"
-							th:field="*{name}"></td>
+							th:field="*{name}" placeholder="Client name"></td>
 						<td><input type="text" class="form-control"
-							th:field="*{additionalInfo}"></td>
+							th:field="*{additionalInfo}" placeholder="Additional info"></td>
 						<td><button type="submit" class="btn btn-primary">Add
 								client</button></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
+
+
 
 	</div>
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>
