@@ -9,28 +9,38 @@
 	<div class="mx-auto" style="width: 80%">
 		<h1>Clients</h1>
 
-		<table class="table table-hover table-sm">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Name</th>
-					<th scope="col">Additional info</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="client : ${clients}">
-					<th scope="row" th:text="${client.id}">Client ID</th>
-					<td th:text="${client.name}">Name</td>
-					<td th:text="${client.additionalInfo}">Additional info</td>
-					<td><a class="btn btn-primary"
-						th:href="@{'/clients/edit/' + ${client.id}}" role="button">Edit</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<form action="/clients/new">
-			<button type="submit" class="btn btn-primary">Add new client</button>
+		<form action="#" th:action="@{/clients/save}" th:object="${newClient}"
+			method="post">
+			<table class="table table-hover table-sm">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Additional info</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="client : ${clients}">
+						<th scope="row" th:text="${client.id}">Client ID</th>
+						<td th:text="${client.name}">Name</td>
+						<td th:text="${client.additionalInfo}">Additional info</td>
+						<td><a class="btn btn-primary"
+							th:href="@{'/clients/edit/' + ${client.id}}" role="button">Edit</a>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="text" class="form-control"
+							th:field="*{name}"></td>
+						<td><input type="text" class="form-control"
+							th:field="*{additionalInfo}"></td>
+						<td><button type="submit" class="btn btn-primary">Add
+								client</button></td>
+					</tr>
+				</tbody>
+			</table>
 		</form>
+
 	</div>
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>

@@ -22,18 +22,12 @@ public class ClientController {
 	@RequestMapping("")
 	public String showClientList(Model model) {
 		List<Client> clients = service.getAllClients();
+		Client newClient = new Client();
+		
 		model.addAttribute("clients", clients);
+		model.addAttribute("newClient", newClient);
 
 		return "clients";
-	}
-
-	@RequestMapping("/new")
-	public String showViewNewClient(Model model) {
-		Client client = new Client();
-
-		model.addAttribute("client", client);
-
-		return "clientAddEdit";
 	}
 
 	@PostMapping(value = "/save")
@@ -49,7 +43,7 @@ public class ClientController {
 
 		model.addAttribute("client", client);
 
-		return "clientAddEdit";
+		return "clientEdit";
 	}
 
 	@RequestMapping("/delete/{id}")
