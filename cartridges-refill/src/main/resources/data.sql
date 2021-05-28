@@ -51,6 +51,28 @@ VALUES
 	('1710', 7, 'MONOCHROME', 'BLACK', 100),
 	('4220', 7, 'MONOCHROME', 'BLACK', 100);
 	
+INSERT INTO cartridge
+	(added_date, uniq_identify, cartridge_model_id, client_id)
+VALUES
+	('28-05-2021', 'B2000', 1, 1),
+	('28-05-2021', 'B2001', 2, 2),
+	('28-05-2021', 'B2002', 3, 1),
+	('28-05-2021', 'B2003', 1, 2),
+	('28-05-2021', 'B2004', 2, 1);
+	
+INSERT INTO employee
+	(login, password, name, surname, position)
+VALUES
+	('admin', 'admin', 'Andrew', 'Savich', 'REFUELLER');
 
+INSERT INTO refill
+	(refill_date, cartridge_id, actual_grams, changed_drum, changed_magnet, is_issued_act, refueller_id)
+VALUES
+	('28-05-2021', 1, 90, true, false, true, 1),
+	('28-05-2021', 2, 90, false, false, true, 1),
+	('28-05-2021', 3, 90, true, true, true, 1),
+	('28-05-2021', 1, 90, false, true, false, 1),
+	('28-05-2021', 2, 90, true, false, true, 1),
+	('28-05-2021', 3, 90, true, true, false, 1);
 
 	

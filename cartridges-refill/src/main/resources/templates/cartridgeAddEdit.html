@@ -5,30 +5,31 @@
 
 <div th:insert="/common_view_parts/scripts :: scripts"></div>
 <script type="text/javascript">
-	$(document)
-		.ready(function() {
-			$('#comboboxGroup')
-		.on('change', function() {
-			var groupId = $(this).val(); $
-													.ajax({
-														type : 'GET',
-														url : "[[@{/cartridges/loadModelsByGroup/}]]"
-																+ groupId,
-														success : function(
-																result) {
-															var result = JSON
-																	.parse(result);
-															var s = '';
-															for (var i = 0; i < result.length; i++) {
-																s += '<option th:if="${cartridge.cartridgeModel.id != ' + result[i].id + '.id}" value=' + result[i].id + '>' + result[i].name + '</option>';
-															}
-															$('#comboboxModel')
-																	.html(s);
-														}
-													});
-										});
+$(document)
+.ready(function () {
+    $('#comboboxGroup')
+        .on('change', function () {
+            var groupId = $(this).val();
+            $
+                .ajax({
+                    type: 'GET',
+                    url: "[[@{/cartridges/loadModelsByGroup/}]]"
+                        + groupId,
+                    success: function (
+                        result) {
+                        var result = JSON
+                            .parse(result);
+                        var s = '';
+                        for (var i = 0; i < result.length; i++) {
+                            s += '<option th:if="${cartridge.cartridgeModel.id != ' + result[i].id + '.id}" value=' + result[i].id + '>' + result[i].name + '</option>';
+                        }
+                        $('#comboboxModel')
+                            .html(s);
+                    }
+                });
+        });
 
-					});
+});
 </script>
 </head>
 
