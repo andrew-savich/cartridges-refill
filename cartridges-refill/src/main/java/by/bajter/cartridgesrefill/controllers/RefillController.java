@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,8 +43,8 @@ public class RefillController {
 			return "refills";
 		}
 		
-		@PostMapping(value = "/save")
-		public String saveRefill(@ModelAttribute("newRefill") Refill refill, 
+		@PostMapping(value = "/saveNew")
+		public String saveNewRefill(@ModelAttribute("newRefill") Refill refill, 
 								@RequestParam(value = "identify") String uniqIdentify,
 								@RequestParam(value = "currentRefueller") String currentRefueller) {
 			
@@ -55,6 +56,26 @@ public class RefillController {
 			
 			refillService.save(refill);
 
+			return "redirect:";
+		}
+		
+		@RequestMapping("/edit/{id}")
+		public String showEditRefillView(@PathVariable(name = "id") Long id, Model model) {
+			Refill refill = refillService.findById(id);
+			
+			System.out.println("We're gonna edit refill: " + refill);
+
+			model.addAttribute("refill", refill);
+
+			return "refillEdit";
+		}
+		
+		@PostMapping(value = "saveEdits")
+		public String saveRefillEdits(@ModelAttribute("refill") Refill refill) {
+			System.out.println("We got refill: " + refill);
+
+			refillService.save(refill);
+			
 			return "redirect:";
 		}
 		
