@@ -7,5 +7,5 @@ import by.bajter.cartridgesrefill.model.employee.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 	
 	public Employee findByLogin(String login);
-	
+
 }

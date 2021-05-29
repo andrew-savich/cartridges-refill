@@ -63,7 +63,7 @@ VALUES
 INSERT INTO employee
 	(login, password, name, surname, position)
 VALUES
-	('admin', 'admin', 'Andrew', 'Savich', 'REFUELLER');
+	('admin', '$2a$10$4Ieug9yWPOq4MksvTd63EOJxmDhK1w50YjTdaost.8VZzR3HHq3te', 'Andrew', 'Savich', 'REFUELLER');
 
 INSERT INTO refill
 	(refill_date, cartridge_id, actual_grams, changed_drum, changed_magnet, is_issued_act, refueller_id)
