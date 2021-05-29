@@ -53,4 +53,8 @@ public class CartridgeService {
 
 		return "B" + ++lastUniqIdentifyNum;
 	}
+
+	public Cartridge findByUniqIdentify(String uniqIdentify) {
+		return repository.findByUniqIdentify(uniqIdentify);
+	}
 }

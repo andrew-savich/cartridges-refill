@@ -6,4 +6,5 @@ import by.bajter.cartridgesrefill.model.cartridges.Cartridge;
 
 public interface CartridgeRepository extends JpaRepository<Cartridge, Long> {
 	
+	Cartridge findByUniqIdentify(String uniqIdentify);
 }

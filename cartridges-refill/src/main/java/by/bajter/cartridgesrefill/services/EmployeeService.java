@@ -32,5 +32,9 @@ public class EmployeeService {
 	public Employee findById(long id) {
 		return repository.findById(id).get();
 	}
+	
+	public Employee findByLogin(String login) {
+		return repository.findByLogin(login);
+	}
 
 }

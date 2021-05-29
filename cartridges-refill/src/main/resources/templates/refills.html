@@ -10,65 +10,118 @@
 <body>
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
 
-	<div class="mx-auto" style="width: 80%">
+	<div class="mx-auto" style="width: 95%">
 		<h1>Refills</h1>
 
-		<table class="table table-sm">
-			<thead class="thead-light">
-				<tr>
-					<th>ID</th>
-					<th>Refill date</th>
-					<th>Uniq Identify</th>
-					<th>Client</th>
-					<th>Group</th>
-					<th>Model</th>
-					<th>Grams</th>
-					<th>Drum</th>
-					<th>PCR</th>
-					<th>Magnet</th>
-					<th>Doser</th>
-					<th>Rakel</th>
-					<th>Chip</th>
-					<th>Firmware</th>
-					<th>Comment</th>
-					<th>Refueller</th>
-					<th>Act</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="refill : ${refills}" align="center">
-					<td th:text="${refill.id}"></td>
-					<td th:text="${refill.refillDate}"></td>
-					<td th:text="${refill.cartridge.uniqIdentify}"></td>
-					<td th:text="${refill.cartridge.client.name}"></td>
-					<td th:text="${refill.cartridge.cartridgeModel.group.title}"></td>
-					<td th:text="${refill.cartridge.cartridgeModel.name}"></td>
-					<td th:text="${refill.actualGrams}"></td>
-					<td ><i th:if="${refill.changedDrum == true}" class="fas fa-check"></i></td>
-					<td><i th:if="${refill.changedPcr == true}" class="fas fa-check"></i></td>
-					<td><i th:if="${refill.changedMagnet == true}" class="fas fa-check"></i></td>
-					<td><i th:if="${refill.changedRakel == true}" class="fas fa-check"></i></td>
-					<td><i th:if="${refill.changedDoserBlade == true}" class="fas fa-check"></i></td>
-					<td><i th:if="${refill.changedChip == true}" class="fas fa-check"></i></td>
-					<td><i th:if="${refill.changedFirmware == true}" class="fas fa-check"></i></td>
-					<td th:text="${refill.comment}"></td>
-					<td th:text="${refill.refueller.login}"></td>
-					<td><i th:if="${refill.isIssuedAct == true}" class="fas fa-check"></i></td>
-					
-					<td><a class="btn btn-primary"
-						th:href="@{'/refills/edit/' + ${refill.id}}" role="button">Edit</a>
-					</td>
-				</tr>
-			</tbody>
+		<form action="#" th:action="@{/refills/save}" th:object="${newRefill}"
+			method="post">
+			<table class="table table-bordered table-sm" >
+				<thead class="thead-light">
+					<tr align="center">
+						<th>ID</th>
+						<th>Date</th>
+						<th>Identify</th>
+						<th>Client</th>
+						<th>Group</th>
+						<th>Model</th>
+						<th>Grams</th>
+						<th>Drum</th>
+						<th>PCR</th>
+						<th>Magnet</th>
+						<th>Doser</th>
+						<th>Rakel</th>
+						<th>Chip</th>
+						<th>Firmware</th>
+						<th>Comment</th>
+						<th>Refueller</th>
+						<th>Act</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="refill : ${refills}" align="center">
+						<td th:text="${refill.id}"></td>
+						<td th:text="${refill.refillDate}"></td>
+						<td th:text="${refill.cartridge.uniqIdentify}"></td>
+						<td th:text="${refill.cartridge.client.name}"></td>
+						<td th:text="${refill.cartridge.cartridgeModel.group.title}"></td>
+						<td th:text="${refill.cartridge.cartridgeModel.name}"></td>
+						<td th:text="${refill.actualGrams}"></td>
+						<td><i th:if="${refill.changedDrum == true}"
+							class="fas fa-check"></i></td>
+						<td><i th:if="${refill.changedPcr == true}"
+							class="fas fa-check"></i></td>
+						<td><i th:if="${refill.changedMagnet == true}"
+							class="fas fa-check"></i></td>
+						<td><i th:if="${refill.changedRakel == true}"
+							class="fas fa-check"></i></td>
+						<td><i th:if="${refill.changedDoserBlade == true}"
+							class="fas fa-check"></i></td>
+						<td><i th:if="${refill.changedChip == true}"
+							class="fas fa-check"></i></td>
+						<td><i th:if="${refill.changedFirmware == true}"
+							class="fas fa-check"></i></td>
+						<td th:text="${refill.comment}"></td>
+						<td th:text="${refill.refueller.login}"></td>
+						<td><i th:if="${refill.isIssuedAct == true}"
+							class="fas fa-check"></i></td>
 
-		</table>
-		<form action="/refills/new/" >
-			<label>Uniq Identify</label>
-			<input type="text" class="form-control" th:field="*{id}">
-			<button type="submit" class="btn btn-primary">Add new refill</button>
+						<td><a class="btn btn-primary"
+							th:href="@{'/refills/edit/' + ${refill.id}}" role="button">Edit</a>
+						</td>
+					</tr>
+					<tr align="center">
+						<td></td>
+						<td>
+							<input type="text" class="form-control"	th:field="*{refillDate}" placeholder="Date">
+						</td>
+						<td>
+							<input type="text" class="form-control"	th:name="identify" placeholder="Identify">
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="text" class="form-control"	th:field="*{actualGrams}" placeholder="Grams">
+						</td>
+						<td>
+							<input class="form-check-input" type="checkbox" th:field="*{changedDrum}">
+						</td>
+						<td>
+							<input class="form-check-input" type="checkbox" th:field="*{changedPcr}">
+						</td>
+						<td>
+							<input class="form-check-input" type="checkbox" th:field="*{changedMagnet}">
+						</td>
+						<td>
+							<input class="form-check-input" type="checkbox" th:field="*{changedDoserBlade}">
+						</td>
+						<td>
+							<input class="form-check-input" type="checkbox" th:field="*{changedRakel}">
+						</td>
+						<td>
+							<input class="form-check-input" type="checkbox" th:field="*{changedChip}">
+						</td>
+						<td>
+							<input class="form-check-input" type="checkbox" th:field="*{changedFirmware}">
+						</td>
+						<td>
+							<input type="text" class="form-control"	th:field="*{comment}" placeholder="comment">
+						</td>
+						<td>
+							<input type="text" class="form-control"	th:name="currentRefueller" placeholder="currentRefueller">
+						</td>
+						<td>
+							<input class="form-check-input" type="checkbox" th:field="*{isIssuedAct}">
+						</td>
+						<td><button type="submit" class="btn btn-primary">Add</button></td>
+					</tr>
+				</tbody>
+			</table>
 		</form>
 	</div>
+
+
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
 </html>

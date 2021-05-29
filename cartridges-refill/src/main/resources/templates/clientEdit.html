@@ -7,8 +7,7 @@
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
 
 	<div class="mx-auto" style="width: 50%">
-		<h1 th:if="${client.id == null}">Add new client</h1>
-		<h1 th:if="${client.id != null}">Edit client</h1>
+		<h1>Edit client</h1>
 
 		<form action="#" th:action="@{/clients/save}" th:object="${client}"
 			method="post">
@@ -28,7 +27,7 @@
 				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</form>
-		<div th:if="${client.id != null}">
+		<div>
 			<a class="btn btn-primary btn-block"
 				th:href="@{'/clients/delete/' + ${client.id}}" role="button">Delete
 				Client</a>

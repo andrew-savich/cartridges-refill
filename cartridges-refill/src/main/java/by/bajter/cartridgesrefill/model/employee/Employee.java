@@ -35,4 +35,5 @@ public class Employee {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Position position;
+
 }
