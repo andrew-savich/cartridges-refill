@@ -63,8 +63,6 @@ public class RefillController {
 		public String showEditRefillView(@PathVariable(name = "id") Long id, Model model) {
 			Refill refill = refillService.findById(id);
 			
-			System.out.println("We're gonna edit refill: " + refill);
-
 			model.addAttribute("refill", refill);
 
 			return "refillEdit";
@@ -72,11 +70,16 @@ public class RefillController {
 		
 		@PostMapping(value = "saveEdits")
 		public String saveRefillEdits(@ModelAttribute("refill") Refill refill) {
-			System.out.println("We got refill: " + refill);
-
 			refillService.save(refill);
 			
 			return "redirect:";
+		}
+		
+		@RequestMapping("/delete/{id}")
+		public String deleteRefill(@PathVariable(value ="id") Long id) {
+			refillService.deleteById(id);
+			
+			return "redirect:/refills";
 		}
 		
 }
