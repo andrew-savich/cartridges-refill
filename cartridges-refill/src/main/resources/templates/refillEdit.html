@@ -9,8 +9,8 @@
 	<div class="mx-auto" style="width: 50%">
 		<h1>Edit refill</h1>
 
-		<form action="#" th:action="@{/refills/saveEdits}" th:object="${refill}"
-			method="post">
+		<form action="#" th:action="@{/refills/saveEdits}"
+			th:object="${refill}" method="post">
 			<div class="form-group">
 				<label>ID</label> <input type="text" class="form-control"
 					th:field="*{id}" readonly="readonly">
@@ -20,61 +20,82 @@
 					th:field="*{refillDate}">
 			</div>
 			<div class="form-group">
-				<label>Uniq identify</label> <input type="text"
-					class="form-control" th:field="*{cartridge}" readonly="readonly" hidden="">
+				<label>Uniq identify</label> <input type="text" class="form-control"
+					th:field="*{cartridge}" readonly="readonly" hidden="true">
+				<input type="text" class="form-control"
+					th:value="${refill.cartridge.uniqIdentify}" readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>Client</label>
-				<input type="text" class="form-control" th:value="*{cartridge.client.name}" readonly="readonly">
+				<label>Client</label> <input type="text" class="form-control"
+					th:value="*{cartridge.client.name}" readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>Group</label> <input type="text"
-					class="form-control" th:value="*{cartridge.cartridgeModel.group.title}" readonly="readonly">
+				<label>Group</label> <input type="text" class="form-control"
+					th:value="*{cartridge.cartridgeModel.group.title}"
+					readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>Model</label> <input type="text"
-					class="form-control" th:value="*{cartridge.cartridgeModel.name}" readonly="readonly">
+				<label>Model</label> <input type="text" class="form-control"
+					th:value="*{cartridge.cartridgeModel.name}" readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>Actual grams</label> <input type="text"
-					class="form-control" th:field="*{actualGrams}">
+				<label>Actual grams</label> <input type="text" class="form-control"
+					th:field="*{actualGrams}">
 			</div>
 			<div class="form-group">
 				<label>Changed parts:</label> <br>
 				<div class="form-check form-check-inline">
-  					<input class="form-check-input" type="checkbox" id="inlineCheckbox1" th:field="*{changedDrum}">
-  					<label class="form-check-label" for="inlineCheckbox1">Drum</label>
+					<input class="form-check-input" type="checkbox"
+						id="inlineCheckbox1" th:field="*{changedDrum}"> <label
+						class="form-check-label" for="inlineCheckbox1">Drum</label>
 				</div>
 				<div class="form-check form-check-inline">
-  					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" th:field="*{changedPcr}">
-  					<label class="form-check-label" for="inlineCheckbox2">PCR</label>
+					<input class="form-check-input" type="checkbox"
+						id="inlineCheckbox2" th:field="*{changedPcr}"> <label
+						class="form-check-label" for="inlineCheckbox2">PCR</label>
 				</div>
 				<div class="form-check form-check-inline">
-  					<input class="form-check-input" type="checkbox" id="inlineCheckbox3" th:field="*{changedMagnet}">
-  					<label class="form-check-label" for="inlineCheckbox3">Magnet</label>
+					<input class="form-check-input" type="checkbox"
+						id="inlineCheckbox3" th:field="*{changedMagnet}"> <label
+						class="form-check-label" for="inlineCheckbox3">Magnet</label>
 				</div>
 				<div class="form-check form-check-inline">
-  					<input class="form-check-input" type="checkbox" id="inlineCheckbox4" th:field="*{changedDoserBlade}">
-  					<label class="form-check-label" for="inlineCheckbox4">Doser</label>
+					<input class="form-check-input" type="checkbox"
+						id="inlineCheckbox4" th:field="*{changedDoserBlade}"> <label
+						class="form-check-label" for="inlineCheckbox4">Doser</label>
 				</div>
 				<div class="form-check form-check-inline">
-  					<input class="form-check-input" type="checkbox" id="inlineCheckbox5" th:field="*{changedRakel}">
-  					<label class="form-check-label" for="inlineCheckbox5">Rakel</label>
+					<input class="form-check-input" type="checkbox"
+						id="inlineCheckbox5" th:field="*{changedRakel}"> <label
+						class="form-check-label" for="inlineCheckbox5">Rakel</label>
 				</div>
 				<div class="form-check form-check-inline">
-  					<input class="form-check-input" type="checkbox" id="inlineCheckbox6" th:field="*{changedChip}">
-  					<label class="form-check-label" for="inlineCheckbox6">Chip</label>
+					<input class="form-check-input" type="checkbox"
+						id="inlineCheckbox6" th:field="*{changedChip}"> <label
+						class="form-check-label" for="inlineCheckbox6">Chip</label>
 				</div>
 				<div class="form-check form-check-inline">
-  					<input class="form-check-input" type="checkbox" id="inlineCheckbox7" th:field="*{changedFirmware}">
-  					<label class="form-check-label" for="inlineCheckbox7">Firmware</label>
+					<input class="form-check-input" type="checkbox"
+						id="inlineCheckbox7" th:field="*{changedFirmware}"> <label
+						class="form-check-label" for="inlineCheckbox7">Firmware</label>
 				</div>
 			</div>
 			<div class="form-group">
-				<label>Refueller</label> <input type="text"
-					class="form-control" th:field="*{refueller}" readonly="readonly" hidden="">
+				<label>Refueller</label> <input type="text" class="form-control"
+					th:field="*{refueller}" hidden="true"> <input type="text"
+					class="form-control" th:value="${refill.refueller.login}"
+					readonly="readonly">
 			</div>
-			
+
+			<div class="form-group">
+				<label>Comment</label> <input type="text" class="form-control"
+					th:field="*{comment}">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control"
+					th:field="*{isIssuedAct}" hidden="true">
+			</div>
+
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
@@ -82,9 +103,9 @@
 		<div>
 			<a class="btn btn-primary btn-block"
 				th:href="@{'/refills/delete/' + ${refill.id}}" role="button">Delete
-				Client</a>
+				Refill</a>
 		</div>
-		</div>
-		<div th:insert="/common_view_parts/scripts :: scripts"></div>
+	</div>
+	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
 </html>
