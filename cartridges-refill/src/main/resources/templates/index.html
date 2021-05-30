@@ -10,7 +10,8 @@
 	</div>
 	
 	<div sec:authorize="isAuthenticated()">
-		Welcom <span sec:authentication="name"></span>
+		Welcome <span sec:authentication="name"></span>
+		<span sec:authentication="principal.authorities">Role</span>
 	</div>
 	
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>

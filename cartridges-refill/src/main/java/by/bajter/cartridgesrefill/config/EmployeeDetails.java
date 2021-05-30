@@ -28,7 +28,11 @@ public class EmployeeDetails implements UserDetails {
 		
 		authorities.add(new SimpleGrantedAuthority(position.name()));
 		
-		return null;
+		return authorities;
+	}
+	
+	public Long getId() {
+		return employee.getId();
 	}
 
 	@Override

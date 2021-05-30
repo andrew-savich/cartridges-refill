@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org">
+<html xmlns:th="http://www.thymleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
 <div th:replace="/common_view_parts/header :: myheader"></div>
 </head>
@@ -24,11 +24,11 @@
 						<th scope="row" th:text="${client.id}">Client ID</th>
 						<td th:text="${client.name}">Name</td>
 						<td th:text="${client.additionalInfo}">Additional info</td>
-						<td><a class="btn btn-primary"
+						<td sec:authorize="hasAnyAuthority('DIRECTOR', 'REFUELLER')" ><a class="btn btn-primary"
 							th:href="@{'/clients/edit/' + ${client.id}}" role="button">Edit</a>
 						</td>
 					</tr>
-					<tr>
+					<tr sec:authorize="hasAnyAuthority('DIRECTOR', 'REFUELLER', 'STAGER')">
 						<td></td>
 						<td><input type="text" class="form-control"
 							th:field="*{name}" placeholder="Client name"></td>

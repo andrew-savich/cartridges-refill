@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org">
+<html xmlns:th="http://www.thymleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
 <div th:replace="/common_view_parts/header :: myheader"></div>
 </head>
@@ -10,8 +10,7 @@
 		<h1 th:if="${employee.id == null}">Add new employee</h1>
 		<h1 th:if="${employee.id != null}">Edit employee</h1>
 
-		<form action="#" th:action="@{/employees/save}"
-			th:object="${employee}" method="post">
+		<form th:action="@{/employees/save}" th:object="${employee}" method="post">
 			<div th:if="${employee.id != null}" class="form-group">
 				<label>ID</label> <input type="text" class="form-control"
 					th:field="*{id}" readonly="readonly">
@@ -19,38 +18,39 @@
 			<div class="form-group">
 				<label>First Name</label> <input type="text" class="form-control"
 					th:field="*{name}">
+				<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger" role="alert"></div>
 			</div>
 			<div class="form-group">
 				<label>Surname</label> <input type="text" class="form-control"
 					th:field="*{surname}">
+					<div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="alert alert-danger" role="alert"></div>
 			</div>
 			<div class="form-group">
 				<label>Login</label> <input type="text" class="form-control"
 					th:field="*{login}">
+					<div th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="alert alert-danger" role="alert"></div>
 			</div>
 			<div class="form-group">
 				<label>Password</label> <input type="text" class="form-control"
 					th:field="*{password}">
+					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger" role="alert"></div>
 			</div>
 			<div class="form-group">
-				<label>Position</label> <select class="form-control" name="position">
-					<option th:text="${employee.position}"></option>
-					<option 
-						th:each="position : ${T(by.bajter.cartridgesrefill.model.employee.Position).values()}"
-						th:if="${employee.position != position}" th:value="${position}"
-						th:text="${position}"></option>
+				<label>Position</label>
+				<select class="form-control" name="position" th:field="*{position}">
+					<option th:if="${employee.id != null}" th:value="${employee.position}" th:text="${employee.position}"></option>
+					<option	th:each="position : ${T(by.bajter.cartridgesrefill.model.employee.Position).values()}" th:if="${employee.position != position}" th:value="${position}" th:text="${position}"></option>
 				</select>
+				<div th:if="${#fields.hasErrors('position')}" th:errors="*{position}" class="alert alert-danger" role="alert"></div>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</form>
-		<div th:if="${employee.id != null}">
-			<a class="btn btn-primary btn-block"
-				th:href="@{'/employees/delete/' + ${employee.id}}" role="button">Delete
-				Employee</a>
+		<div th:if="${employee.id != null && #authentication.getPrincipal().getId() != employee.id}">
+			<a class="btn btn-primary btn-block" th:href="@{'/employees/delete/' + ${employee.id}}" role="button">Delete Employee</a>
 		</div>
-		</div>
-		<div th:insert="/common_view_parts/scripts :: scripts"></div>
+	</div>
+	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
 </html>
