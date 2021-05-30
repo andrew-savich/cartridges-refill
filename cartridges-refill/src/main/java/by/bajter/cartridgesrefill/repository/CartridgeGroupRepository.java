@@ -6,4 +6,6 @@ import by.bajter.cartridgesrefill.model.cartridges.CartridgeGroup;
 
 public interface CartridgeGroupRepository extends JpaRepository<CartridgeGroup, Long>{
 
+	CartridgeGroup findByTitle(String title);
+
 }

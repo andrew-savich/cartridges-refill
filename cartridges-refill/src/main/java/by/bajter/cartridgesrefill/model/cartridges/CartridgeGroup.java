@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.google.gson.annotations.Expose;
 
@@ -30,6 +31,7 @@ public class CartridgeGroup {
 	@NotNull
 	@Column(unique = true)
 	@Expose
+	@Size(min = 2, max = 30, message = "Title should be beetween 2 and 30 characters")
 	private String title;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "group", cascade = CascadeType.MERGE, orphanRemoval = true)

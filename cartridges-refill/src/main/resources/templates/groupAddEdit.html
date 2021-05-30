@@ -7,26 +7,26 @@
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
 
 	<div class="mx-auto" style="width: 50%">
-		<h1>Edit group</h1>
+		<h1 th:if="${group.id == null}">Add group</h1>
+		<h1 th:if="${group.id != null}">Edit group</h1>
 
 		<form action="#" th:action="@{/cartridgeModelGroups/saveGroup}" th:object="${group}"
 			method="post">
-			<div class="form-group">
+			<div th:if="${group.id != null}" class="form-group">
 				<label>ID</label> <input type="text" class="form-control"
 					th:field="*{id}" readonly="readonly">
 			</div>
 			<div class="form-group">
 				<label>Title</label> <input type="text" class="form-control"
 					th:field="*{title}">
+				<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger" role="alert"></div>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</form>
-		<div>
-			<a class="btn btn-primary btn-block"
-				th:href="@{'/cartridgeModelGroups/delete/' + ${group.id}}" role="button">Delete
-				group</a>
+		<div th:if="${group.id != null}">
+			<a class="btn btn-primary btn-block" th:href="@{'/cartridgeModelGroups/delete/' + ${group.id}}" role="button">Delete group</a>
 		</div>
 		</div>
 		<div th:insert="/common_view_parts/scripts :: scripts"></div>

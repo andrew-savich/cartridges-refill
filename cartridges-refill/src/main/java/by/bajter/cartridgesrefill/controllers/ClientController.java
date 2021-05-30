@@ -27,29 +27,23 @@ public class ClientController {
 	@GetMapping("")
 	public String showClientList(Model model) {
 		List<Client> clients = service.getAllClients();
-		Client newClient = new Client();
 
 		model.addAttribute("clients", clients);
-		model.addAttribute("newClient", newClient);
 
 		return "clients";
 	}
 
 	@PostMapping(value = "/save")
 	public String saveClient(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return "clientAddEdit";
-		}
-		
 		if (client.getId() == null && service.findByName(client.getName()) != null) {
 			bindingResult.addError(new FieldError("Client", "name", "Client with this name exists!"));
-
-			return "clientAddEdit";
 		}
 		
 		if (client.getId() != null && service.findByName(client.getName()) != null && service.findByName(client.getName()).getId() != client.getId()) {
 			bindingResult.addError(new FieldError("Client", "name", "Client with this name exists!"));
-
+		}
+		
+		if (bindingResult.hasErrors()) {
 			return "clientAddEdit";
 		}
 

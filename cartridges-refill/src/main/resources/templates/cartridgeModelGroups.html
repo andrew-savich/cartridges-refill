@@ -9,12 +9,8 @@
 	<div class="mx-auto" style="width: 80%">
 		<h1>Cartridge Groups</h1>
 
-		<form action="#" th:action="@{/cartridgeModelGroups/saveGroup}" th:object="${newGroup}" method="post" class="form-inline">
-			<div class="form-group mx-sm-3 mb-2">
-				<label for="newGroupTitle" class="sr-only">Title</label>
-				<input type="text" id="newGroupTitle" th:field="*{title}" class="form-control" placeholder="Title">
-			</div>
-			<button type="submit" class="btn btn-primary mb-2">Add new group</button>
+		<form action="/cartridgeModelGroups/newGroup">
+			<button type="submit" class="btn btn-primary">Add new group</button>
 		</form>
 
 		<table class="table table-sm">
