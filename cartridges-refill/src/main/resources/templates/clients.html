@@ -9,8 +9,6 @@
 	<div class="mx-auto" style="width: 80%">
 		<h1>Clients</h1>
 
-		<form action="#" th:action="@{/clients/save}" th:object="${newClient}"
-			method="post">
 			<table class="table table-hover table-sm">
 				<thead>
 					<tr>
@@ -28,20 +26,12 @@
 							th:href="@{'/clients/edit/' + ${client.id}}" role="button">Edit</a>
 						</td>
 					</tr>
-					<tr sec:authorize="hasAnyAuthority('DIRECTOR', 'REFUELLER', 'STAGER')">
-						<td></td>
-						<td><input type="text" class="form-control"
-							th:field="*{name}" placeholder="Client name"></td>
-						<td><input type="text" class="form-control"
-							th:field="*{additionalInfo}" placeholder="Additional info"></td>
-						<td><button type="submit" class="btn btn-primary">Add
-								client</button></td>
-					</tr>
 				</tbody>
 			</table>
+		
+		<form action="/clients/new">
+			<button type="submit" class="btn btn-primary">Add new client</button>
 		</form>
-
-
 
 	</div>
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>

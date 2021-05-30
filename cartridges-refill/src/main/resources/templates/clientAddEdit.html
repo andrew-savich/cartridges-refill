@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org">
+<html xmlns:th="http://www.thymleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
 <div th:replace="/common_view_parts/header :: myheader"></div>
 </head>
@@ -7,7 +7,8 @@
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
 
 	<div class="mx-auto" style="width: 50%">
-		<h1>Edit client</h1>
+		<h1 th:if="${client.id == null}">Add client</h1>
+		<h1 th:if="${client.id != null}">Edit client</h1>
 
 		<form action="#" th:action="@{/clients/save}" th:object="${client}"
 			method="post">
@@ -18,6 +19,7 @@
 			<div class="form-group">
 				<label>Name</label> <input type="text" class="form-control"
 					th:field="*{name}">
+				<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger" role="alert"></div>
 			</div>
 			<div class="form-group">
 				<label>Additional info</label> <input type="text"
@@ -27,7 +29,7 @@
 				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</form>
-		<div sec:authorize="hasAnyAuthority('DIRECTOR')">
+		<div sec:authorize="hasAnyAuthority('DIRECTOR', 'REFUELLER')" th:if="${client.id != null}">
 			<a class="btn btn-primary btn-block"
 				th:href="@{'/clients/delete/' + ${client.id}}" role="button">Delete
 				Client</a>

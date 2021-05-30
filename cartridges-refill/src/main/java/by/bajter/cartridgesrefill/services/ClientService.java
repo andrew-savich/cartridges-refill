@@ -32,4 +32,8 @@ public class ClientService {
 	public Client findById(long id) {
 		return repository.findById(id).get();
 	}
+
+	public Client findByName(String name) {
+		return repository.findByName(name);
+	}
 }
