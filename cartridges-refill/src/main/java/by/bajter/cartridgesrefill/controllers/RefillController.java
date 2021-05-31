@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class RefillController {
 		@Autowired
 		private EmployeeService employeeService;
 		
-		@RequestMapping(value = "")
+		@GetMapping(value = "")
 		public String showRefillsView(Model model) {
 			List<Refill> refills = refillService.getAllReffils();
 			Refill newRefill = new Refill();
@@ -59,7 +60,7 @@ public class RefillController {
 			return "redirect:";
 		}
 		
-		@RequestMapping("/edit/{id}")
+		@GetMapping("/edit/{id}")
 		public String showEditRefillView(@PathVariable(name = "id") Long id, Model model) {
 			Refill refill = refillService.findById(id);
 			
@@ -75,7 +76,7 @@ public class RefillController {
 			return "redirect:";
 		}
 		
-		@RequestMapping("/delete/{id}")
+		@GetMapping("/delete/{id}")
 		public String deleteRefill(@PathVariable(value ="id") Long id) {
 			refillService.deleteById(id);
 			

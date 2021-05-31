@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,7 @@ public class CartridgeController {
 	@Autowired
 	private ClientService clientService;
 
-	@RequestMapping("")
+	@GetMapping("")
 	public String showCartridgesView(Model model) {
 		List<Cartridge> cartridges = cartridgeService.getAllCartridges();
 
@@ -44,7 +45,7 @@ public class CartridgeController {
 		return "cartridges";
 	}
 
-	@RequestMapping("/new")
+	@GetMapping("/new")
 	public String showAddCartridgeView(Model model) {
 		Cartridge cartridge = new Cartridge();
 		cartridge.setUniqIdentify(cartridgeService.getUniqIdentify());
@@ -60,7 +61,7 @@ public class CartridgeController {
 		return "cartridgeAddEdit";
 	}
 
-	@RequestMapping(value = "loadModelsByGroup/{id}")
+	@GetMapping(value = "loadModelsByGroup/{id}")
 	@ResponseBody
 	public String loadModelsByGroup(@PathVariable("id") Long id) {
 		CartridgeGroup group = cartridgeGroupService.findById(id);
@@ -76,7 +77,7 @@ public class CartridgeController {
 		return "redirect:";
 	}
 	
-	@RequestMapping("/edit/{id}")
+	@GetMapping("/edit/{id}")
 	public String showEditCartridgeView(@PathVariable(name = "id") Long id, Model model) {
 		Cartridge cartridge = cartridgeService.findById(id);
 		List<CartridgeGroup> cartridgeGroups = cartridgeGroupService.getAllCartridgeGroups();
@@ -89,7 +90,7 @@ public class CartridgeController {
 		return "cartridgeAddEdit";
 	}
 	
-	@RequestMapping(value="/delete/{id}")
+	@GetMapping(value="/delete/{id}")
 	public String deleteCArtridge(@PathVariable(name = "id") Long id) {
 		cartridgeService.deleteById(id);
 		

@@ -15,25 +15,26 @@ import by.bajter.cartridgesrefill.services.EmployeeDetailsService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Bean
 	public UserDetailsService employeeDetailsService() {
 		return new EmployeeDetailsService();
 	}
-	
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	@Bean DaoAuthenticationProvider authentificationProvider() {
+
+	@Bean
+	public DaoAuthenticationProvider authentificationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setPasswordEncoder(passwordEncoder());
 		authProvider.setUserDetailsService(employeeDetailsService());
-		
+
 		return authProvider;
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authentificationProvider());
@@ -45,10 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/employees/**").hasAuthority("DIRECTOR")
 		.anyRequest().authenticated()
 		.and()
-		.formLogin().permitAll()
+		.formLogin()
+		.permitAll()
 		.and()
-		.logout().permitAll();
+		.logout()
+		.permitAll();
 	}
 
-	
 }

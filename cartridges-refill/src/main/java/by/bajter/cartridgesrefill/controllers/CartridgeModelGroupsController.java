@@ -37,7 +37,7 @@ public class CartridgeModelGroupsController {
 
 		return "/cartridgeModelGroups";
 	}
-	
+
 	@GetMapping("/newGroup")
 	public String showAddClientView(Model model) {
 		CartridgeGroup group = new CartridgeGroup();
@@ -47,22 +47,22 @@ public class CartridgeModelGroupsController {
 		return "groupAddEdit";
 	}
 
-
 	@PostMapping(value = "/saveGroup")
 	public String saveNewGroup(@ModelAttribute("group") @Valid CartridgeGroup group, BindingResult bindingResult) {
-		
+
 		if (group.getId() == null && groupService.findByTitle(group.getTitle()) != null) {
 			bindingResult.addError(new FieldError("CartridgeGroup", "title", "Group with this title exists!"));
 		}
-		
-		if (group.getId() != null && groupService.findByTitle(group.getTitle()) != null && groupService.findByTitle(group.getTitle()).getId() != group.getId()) {
+
+		if (group.getId() != null && groupService.findByTitle(group.getTitle()) != null
+				&& groupService.findByTitle(group.getTitle()).getId() != group.getId()) {
 			bindingResult.addError(new FieldError("CartridgeGroup", "title", "Group with this title exists!"));
 		}
-		
+
 		if (bindingResult.hasErrors()) {
 			return "groupAddEdit";
 		}
-		
+
 		groupService.save(group);
 
 		return "redirect:";
@@ -96,8 +96,8 @@ public class CartridgeModelGroupsController {
 	}
 
 	@PostMapping(value = "/{cartridgeGroupId}/saveModel")
-	public String saveCartidgeModel(@ModelAttribute("cartridgeModel") CartridgeModel cartridgeModel,
-			@PathVariable(name = "cartridgeGroupId") Long cartridgeGroupId) {
+	public String saveCartidgeModel(@PathVariable(name = "cartridgeGroupId") Long cartridgeGroupId,
+			@ModelAttribute("cartridgeModel") @Valid CartridgeModel cartridgeModel, BindingResult bindingResult) {
 
 		if (cartridgeModel.getGroup() != null) {
 			modelService.save(cartridgeModel);
@@ -125,7 +125,7 @@ public class CartridgeModelGroupsController {
 
 		return "modelAddEdit";
 	}
-	
+
 	@GetMapping(value = "/deleteModel/{id}")
 	public String deleteModel(Model model, @PathVariable(name = "id") Long id) {
 		CartridgeModel cartridgeModel = modelService.findById(id);
