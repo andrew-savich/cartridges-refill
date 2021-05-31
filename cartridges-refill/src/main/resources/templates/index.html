@@ -9,11 +9,6 @@
 		<h1>Home page</h1>
 	</div>
 	
-	<div sec:authorize="isAuthenticated()">
-		Welcome <span sec:authentication="name"></span>
-		<span sec:authentication="principal.authorities">Role</span>
-	</div>
-	
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
 </html>

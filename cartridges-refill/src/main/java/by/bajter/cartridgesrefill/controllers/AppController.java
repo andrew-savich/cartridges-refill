@@ -10,11 +10,4 @@ public class AppController {
 	public String showStartPage() {
 		return "index";
 	}
-	
-	@GetMapping(value = "/login")
-	public String login() {
-		
-		return "login";
-	}
-
 }

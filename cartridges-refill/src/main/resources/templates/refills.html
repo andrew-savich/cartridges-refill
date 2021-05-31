@@ -13,7 +13,7 @@
 	<div class="mx-auto" style="width: 95%">
 		<h1>Refills</h1>
 
-		<form action="#" th:action="@{/refills/saveNew}" th:object="${newRefill}"
+		<form th:action="@{/refills/saveNew}" th:object="${newRefill}"
 			method="post">
 			<table class="table table-bordered table-sm" >
 				<thead class="thead-light">
@@ -109,7 +109,7 @@
 							<input type="text" class="form-control"	th:field="*{comment}" placeholder="comment">
 						</td>
 						<td>
-							<input type="text" class="form-control"	th:name="currentRefueller" placeholder="currentRefueller">
+							<input type="text" class="form-control"	th:name="currentRefueller" th:value="${#authentication.name}" readonly="readonly">
 						</td>
 						<td>
 							<input class="form-check-input" type="checkbox" th:field="*{isIssuedAct}">

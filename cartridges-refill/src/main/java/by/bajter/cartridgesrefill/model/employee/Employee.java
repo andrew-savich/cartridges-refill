@@ -36,7 +36,7 @@ public class Employee {
 	private String login;
 	
 	@NotNull
-	@Size(min = 4, max = 16, message = "Password should be from 4 to 16 characters")
+	@Size(min = 4, max = 64, message = "Password should be from 4 to 64 characters")
 	private String password;
 
 	@NotNull
