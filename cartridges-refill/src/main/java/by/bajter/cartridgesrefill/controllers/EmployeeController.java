@@ -44,11 +44,13 @@ public class EmployeeController {
 
 	@PostMapping(value = "/save")
 	public String saveNewEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult) {
-		if (employee.getId() == null && service.findByLogin(employee.getLogin()) != null) {
+		Employee existEmployee = service.findByLogin(employee.getLogin());
+		
+		if (employee.getId() == null && existEmployee != null) {
 			bindingResult.addError(new FieldError("Employee", "login", "Login exists!"));
 		}
 		
-		if (employee.getId() != null && service.findByLogin(employee.getLogin()) != null && service.findByLogin(employee.getLogin()).getId() != employee.getId()) {
+		if (employee.getId() != null && existEmployee != null && existEmployee.getId() != employee.getId()) {
 			bindingResult.addError(new FieldError("Employee", "login", "Login exists!"));
 		}
 		

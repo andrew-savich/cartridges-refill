@@ -35,11 +35,13 @@ public class ClientController {
 
 	@PostMapping(value = "/save")
 	public String saveClient(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult) {
-		if (client.getId() == null && service.findByName(client.getName()) != null) {
+		Client existClient = service.findByName(client.getName());
+		
+		if (client.getId() == null && existClient != null) {
 			bindingResult.addError(new FieldError("Client", "name", "Client with this name exists!"));
 		}
 		
-		if (client.getId() != null && service.findByName(client.getName()) != null && service.findByName(client.getName()).getId() != client.getId()) {
+		if (client.getId() != null && existClient != null && existClient.getId() != client.getId()) {
 			bindingResult.addError(new FieldError("Client", "name", "Client with this name exists!"));
 		}
 		
