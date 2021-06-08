@@ -12,6 +12,9 @@ local.properties
 .loadpath
 .recommenders
 
+### IDEA ###
+.idea/
+
 #Ignore META-INF 
 META-INF
 
