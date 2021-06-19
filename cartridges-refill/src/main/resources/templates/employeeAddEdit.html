@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
 <head>
 <div th:replace="/common_view_parts/header :: myheader"></div>
 </head>
@@ -11,44 +12,99 @@
 		<h1 th:if="${employee.id != null}">Edit employee</h1>
 
 		<form th:action="@{/employees/save}" th:object="${employee}" method="post">
-			<div th:if="${employee.id != null}" class="form-group">
-				<label>ID</label> <input type="text" class="form-control"
-					th:field="*{id}" readonly="readonly">
+			<div th:if="${employee.id != null}" class="form-group row">
+				<label for="id" class="col-sm-2 col-form-label">ID</label>
+				<div class="col-sm-2">
+					<input id="id" type="text" class="form-control" th:field="*{id}"
+						readonly="readonly">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="firstNmae" class="col-sm-2 col-form-label">First
+					name</label>
+				<div class="col-sm-8">
+					<input id="firstNmae" type="text" class="form-control"
+						th:field="*{name}">
+				</div>
+				<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+					class="alert alert-danger" role="alert"></div>
+			</div>
+			<div class="form-group row">
+				<label for="surname" class="col-sm-2 col-form-label">Surname</label>
+				<div class="col-sm-8">
+					<input id="surname" type="text" class="form-control"
+						th:field="*{surname}">
+				</div>
+				<div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"
+					class="alert alert-danger" role="alert"></div>
+			</div>
+			<div class="form-group row">
+				<label for="login" class="col-sm-2 col-form-label">Login</label>
+				<div class="col-sm-8">
+					<input id="login" type="text" class="form-control"
+						th:field="*{login}">
+				</div>
+				<div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+					class="alert alert-danger" role="alert"></div>
+			</div>
+			<div th:if="${employee.id == null}" class="form-group row">
+				<label for="password" class="col-sm-2 col-form-label">Password</label>
+				<div class="col-sm-8">
+					<input id="password" type="text" class="form-control"
+						th:field="*{password}">
+				</div>
+				<div th:if="${#fields.hasErrors('password')}"
+					th:errors="*{password}" class="alert alert-danger" role="alert"></div>
+			</div>
+			<div class="form-group row">
+				<label for="position" class="col-sm-2 col-form-label">Position</label>
+				<div class="col-sm-8">
+					<select id="position" class="form-control" name="position"
+						th:field="*{position}">
+						<option th:if="${employee.id != null}"
+							th:value="${employee.position}" th:text="${employee.position}"></option>
+						<option
+							th:each="position : ${T(by.bajter.cartridgesrefill.model.employee.Position).values()}"
+							th:if="${employee.position != position}" th:value="${position}"
+							th:text="${position}"></option>
+					</select>
+				</div>
+				<div th:if="${#fields.hasErrors('position')}"
+					th:errors="*{position}" class="alert alert-danger" role="alert"></div>
 			</div>
 			<div class="form-group">
-				<label>First Name</label> <input type="text" class="form-control"
-					th:field="*{name}">
-				<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger" role="alert"></div>
+				<button type="submit" class="btn btn-primary btn-lg" >Save</button>
 			</div>
-			<div class="form-group">
-				<label>Surname</label> <input type="text" class="form-control"
-					th:field="*{surname}">
-					<div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="alert alert-danger" role="alert"></div>
+
+
+			<!-- 	<div th:if="${employee.id != null}" class="form-group row">
+				<a class="btn btn-primary"
+					th:href="@{'/employees/edit/' + ${employee.id} + '/changePassword'}"
+					role="button">Change password</a>
 			</div>
-			<div class="form-group">
-				<label>Login</label> <input type="text" class="form-control"
-					th:field="*{login}">
-					<div th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="alert alert-danger" role="alert"></div>
-			</div>
-			<div th:if="${employee.id == null}" class="form-group">
-				<label>Password</label> <input type="text" class="form-control"
-					th:field="*{password}">
-					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger" role="alert"></div>
-			</div>
-			<div class="form-group">
-				<label>Position</label>
-				<select class="form-control" name="position" th:field="*{position}">
-					<option th:if="${employee.id != null}" th:value="${employee.position}" th:text="${employee.position}"></option>
-					<option	th:each="position : ${T(by.bajter.cartridgesrefill.model.employee.Position).values()}" th:if="${employee.position != position}" th:value="${position}" th:text="${position}"></option>
-				</select>
-				<div th:if="${#fields.hasErrors('position')}" th:errors="*{position}" class="alert alert-danger" role="alert"></div>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Save</button>
-			</div>
+		-->
 		</form>
-		<div th:if="${employee.id != null && #authentication.getPrincipal().getId() != employee.id}">
-			<a class="btn btn-primary btn-block" th:href="@{'/employees/delete/' + ${employee.id}}" role="button">Delete Employee</a>
+
+	<div th:if="${employee.id != null}">
+		<form th:action="@{/employees/changePassword}" th:object="${employee}" method="post" >
+			<div class="form-group row">
+				<div class="col-sm-8">
+					<input id="newPassword" type="password" class="form-control" placeholder="New password">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-8">
+					<input id="confirmPassword" type="password" class="form-control" placeholder="Confirm password">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary mb-2">Change password</button>
+		</form>
+	</div>
+		<div
+			th:if="${employee.id != null && #authentication.getPrincipal().getId() != employee.id}">
+			<a class="btn btn-danger btn-block"
+				th:href="@{'/employees/delete/' + ${employee.id}}" role="button">Delete
+				Employee</a>
 		</div>
 	</div>
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>

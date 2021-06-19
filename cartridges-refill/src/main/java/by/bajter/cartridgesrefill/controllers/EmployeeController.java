@@ -85,6 +85,16 @@ public class EmployeeController {
 
 		return "redirect:/employees";
 	}
+	
+	@GetMapping("/edit/{id}/changePassword")
+	public String showChangePasswordView(@PathVariable(name = "id") Long id, Model model) {
+		Employee employee = service.findById(id);
+		
+		model.addAttribute("employee", employee);
+		
+		return "changePassword";
+	}
+	
 
 
 }
