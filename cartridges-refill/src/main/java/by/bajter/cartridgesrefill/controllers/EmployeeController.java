@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import by.bajter.cartridgesrefill.model.employee.Employee;
 import by.bajter.cartridgesrefill.services.EmployeeService;
@@ -86,15 +87,11 @@ public class EmployeeController {
 		return "redirect:/employees";
 	}
 	
-	@GetMapping("/edit/{id}/changePassword")
-	public String showChangePasswordView(@PathVariable(name = "id") Long id, Model model) {
-		Employee employee = service.findById(id);
+	@PostMapping("/changePassword/{id}")
+	public String changePasswordView(@PathVariable(name = "id") Long id, @RequestParam String newPassword) {
+		System.out.println("We got new password: " + newPassword);
 		
-		model.addAttribute("employee", employee);
-		
-		return "changePassword";
+		return "redirect:/employees";
 	}
-	
-
 
 }

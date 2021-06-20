@@ -3,8 +3,12 @@
 	xmlns:sec="http://www.thymeleaf.org">
 <head>
 <div th:replace="/common_view_parts/header :: myheader"></div>
+
+
+  
 </head>
 <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
 
 	<div class="mx-auto" style="width: 50%">
@@ -75,38 +79,47 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-lg" >Save</button>
 			</div>
-
-
-			<!-- 	<div th:if="${employee.id != null}" class="form-group row">
-				<a class="btn btn-primary"
-					th:href="@{'/employees/edit/' + ${employee.id} + '/changePassword'}"
-					role="button">Change password</a>
-			</div>
-		-->
 		</form>
 
-	<div th:if="${employee.id != null}">
-		<form th:action="@{/employees/changePassword}" th:object="${employee}" method="post" >
-			<div class="form-group row">
-				<div class="col-sm-8">
-					<input id="newPassword" type="password" class="form-control" placeholder="New password">
+		<div th:if="${employee.id != null}">
+			<form th:action="@{'/employees/changePassword/' + ${employee.id}}" method="post" >
+				<div class="form-group row">
+					<div class="col-sm-8">
+						<input id="newPassword" type="password" name="newPassword" class="form-control" placeholder="New password">
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-8">
-					<input id="confirmPassword" type="password" class="form-control" placeholder="Confirm password">
+				<div class="form-group row">
+					<div class="col-sm-8">
+						<input id="confirmPassword" type="password" class="form-control" placeholder="Confirm password">
+					</div>
 				</div>
-			</div>
-			<button type="submit" class="btn btn-primary mb-2">Change password</button>
-		</form>
-	</div>
-		<div
-			th:if="${employee.id != null && #authentication.getPrincipal().getId() != employee.id}">
-			<a class="btn btn-danger btn-block"
-				th:href="@{'/employees/delete/' + ${employee.id}}" role="button">Delete
-				Employee</a>
+				<div class="alert alert-warning" role="alert" id="changePasswordAlert"> 
+				</div>
+				<button type="submit" class="btn btn-primary mb-2">Change password</button>
+			</form>
 		</div>
-	</div>
+			<div
+				th:if="${employee.id != null && #authentication.getPrincipal().getId() != employee.id}">
+				<a class="btn btn-danger btn-block"
+					th:href="@{'/employees/delete/' + ${employee.id}}" role="button">Delete Employee</a>
+			</div>
+		</div>
+		
+		<script>
+    function checkPasswordMatch() {
+    	alert("checking confirm password");
+        var newPassword = $("#newPassword").val();
+        var confirmPassword = $("#confirmPassword").val();
+        if (password != confirmPassword)
+            $("#changePasswordAlert").html("Passwords does not match!");
+        else
+            $("#changePasswordAlert").html("Passwords match.");
+    }
+    $(document).ready(function () {
+       $("#txtConfirmPassword").keyup(checkPasswordMatch);
+    });
+  </script>
+		
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
 </html>
