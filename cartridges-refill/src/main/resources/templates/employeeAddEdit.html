@@ -3,12 +3,11 @@
 	xmlns:sec="http://www.thymeleaf.org">
 <head>
 <div th:replace="/common_view_parts/header :: myheader"></div>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
 </head>
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 	<div th:insert="/common_view_parts/navbar :: navbar"></div>
 
 	<div class="mx-auto" style="width: 50%">
@@ -85,15 +84,16 @@
 			<form th:action="@{'/employees/changePassword/' + ${employee.id}}" method="post" >
 				<div class="form-group row">
 					<div class="col-sm-8">
-						<input id="newPassword" type="password" name="newPassword" class="form-control" placeholder="New password">
+						<input id="txtNewPassword" type="password" name="newPassword" class="form-control" placeholder="New password">
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-8">
-						<input id="confirmPassword" type="password" class="form-control" placeholder="Confirm password">
+						<input id="txtConfirmPassword" type="password" class="form-control" placeholder="Confirm password">
 					</div>
 				</div>
-				<div class="alert alert-warning" role="alert" id="changePasswordAlert"> 
+				<div class="col-sm-8">
+					<div class="alert alert-warning" role="alert" id="divChangePasswordAlert"></div>
 				</div>
 				<button type="submit" class="btn btn-primary mb-2">Change password</button>
 			</form>
@@ -105,20 +105,20 @@
 			</div>
 		</div>
 		
-		<script>
-    function checkPasswordMatch() {
-    	alert("checking confirm password");
-        var newPassword = $("#newPassword").val();
-        var confirmPassword = $("#confirmPassword").val();
-        if (password != confirmPassword)
-            $("#changePasswordAlert").html("Passwords does not match!");
-        else
-            $("#changePasswordAlert").html("Passwords match.");
-    }
-    $(document).ready(function () {
-       $("#txtConfirmPassword").keyup(checkPasswordMatch);
-    });
-  </script>
+		<script type="text/javascript">
+		function checkPasswordMatch() {		    
+		    var newPassword = $("#txtNewPassword").val();
+		    var confirmPassword = $("#txtConfirmPassword").val();
+		    if (newPassword != confirmPassword)
+		    	 $("#divChangePasswordAlert").html("Passwords don't match!");
+		    else
+		    	$("#divChangePasswordAlert").html("Passwords match!");
+		}
+
+		$(document).ready(function () {
+		    $("#txtConfirmPassword").keyup(checkPasswordMatch);
+		});
+		</script>
 		
 	<div th:insert="/common_view_parts/scripts :: scripts"></div>
 </body>
